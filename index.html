@@ -17,9 +17,11 @@
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Identidade Web | Criação de Sites e Estrutura Digital" />
   <meta name="twitter:description" content="Site profissional, link na bio e SEO para negócios locais no Brasil." />
-  <title>Criação de Site Profissional | Identidade Web — Negócios Locais</title>
-  <link rel="icon" type="image/png" href="assets/logo%20identidade%20web.png" />
-  <link rel="apple-touch-icon" href="assets/logo%20identidade%20web.png" />
+  <title>Identidade Web | Criação de Site Profissional — Negócios Locais</title>
+  <link rel="icon" type="image/png" href="assets/logo%20identidade%20web.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="assets/logo%20identidade%20web.png" sizes="64x64" />
+  <link rel="icon" type="image/png" href="assets/logo%20identidade%20web.png" sizes="96x96" />
+  <link rel="apple-touch-icon" href="assets/logo%20identidade%20web.png" sizes="180x180" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet" />
@@ -161,9 +163,9 @@
     }
     .logo-link:hover { opacity: 0.9; }
     .logo-mark {
-      height: 42px;
+      height: 64px;
       width: auto;
-      max-width: min(72px, 18vw);
+      max-width: min(96px, 18vw);
       object-fit: contain;
       object-position: left center;
       display: block;
@@ -623,17 +625,49 @@
       gap: 0.75rem;
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
+    .trusted-container {
+      overflow-x: auto;
+      scroll-snap-type: none;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    .trusted-container::-webkit-scrollbar {
+      display: none;
+    }
+    .trusted-container .trusted-grid {
+      display: flex;
+      flex-direction: row;
+      gap: 0.75rem;
+      min-width: max-content;
+    }
+    .trusted-container .trusted-item {
+      scroll-snap-align: none;
+      flex-shrink: 0;
+      width: 180px;
+      min-width: 180px;
+    }
     @media (min-width: 640px) {
-      .trusted-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .trusted-container {
+        overflow-x: auto;
+      }
+      .trusted-container .trusted-item {
+        width: 180px;
+      }
     }
     @media (min-width: 900px) {
-      .trusted-grid { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+      .trusted-container {
+        overflow-x: auto;
+      }
+      .trusted-container .trusted-item {
+        width: 180px;
+      }
     }
     .trusted-item {
       min-height: 78px;
-      border: 1px solid rgba(10, 37, 64, 0.06);
+      /*border: 1px solid rgba(10, 37, 64, 0.06);*/
       border-radius: 12px;
-      background: #F5F7FA;
+      /*background: #F5F7FA;*/
       display: flex;
       align-items: center;
       justify-content: center;
@@ -710,8 +744,13 @@
       gap: 2rem;
       align-items: center;
     }
+    .offer-cards {
+      display: grid;
+      gap: 2rem;
+    }
     @media (min-width: 768px) {
-      .offer-wrap { grid-template-columns: 1.1fr 0.9fr; }
+      .offer-wrap { grid-template-columns: 1fr; }
+      .offer-cards { grid-template-columns: 1fr 1fr; }
     }
     .offer-card {
       padding: 2.5rem;
@@ -907,7 +946,7 @@
   <header class="header" id="header">
     <div class="container header-inner">
       <a href="https://identidadeweb.com/" class="logo-link" aria-label="Identidade Web — Início">
-        <img class="logo-mark" src="assets/logo%20identidade%20web.png" alt="Identidade Web — criação de sites e estrutura digital para negócios locais" width="48" height="48" decoding="async" />
+        <img class="logo-mark" src="assets/logo%20identidade%20web.png" alt="Identidade Web — criação de sites e estrutura digital para negócios locais" width="64" height="64" decoding="async" />
         <span class="logo-text">Identidade <span>Web</span></span>
       </a>
       <a class="nav-cta wa-link" href="#" data-wa>Falar no WhatsApp</a>
@@ -925,7 +964,7 @@
             <a class="btn btn-primary wa-link" href="#" data-wa>Quero minha estrutura digital</a>
           </div>
         </div>
-        <div class="mockup-wrap reveal">
+      <div class="mockup-wrap reveal">
           <div class="mockup" aria-hidden="true">
             <div class="mockup-bar">
               <span class="mockup-dot"></span>
@@ -945,12 +984,64 @@
                   <div class="mockup-block w-80"></div>
                   <div class="mockup-block w-60"></div>
                 </div>
+                <img src="./assets/Appointment.gif" alt="" style="height: 20%; display: inline; margin-left: 1rem;">
+                <img src="./assets/Creative.gif" alt="" style="height: 20%; display: inline;">
+                <img src="./assets/Social Media.gif" alt="" style="height: 20%; display: inline;">
+                <img src="./assets/Website SEO Audit.gif" alt="SEO" style="height: 20%; display: inline;">
+                <img src="./assets/social media redes.gif" alt="SEO" style="height: 20%; display: inline;">
               </div>
+              
             </div>
           </div>
         </div>
       </div>
     </section>
+
+
+      <section class="section trusted" id="empresas" aria-labelledby="empresas-titulo">
+      <div class="container">
+        <h2 id="empresas-titulo" class="trusted-title reveal">Empresas que já confiaram na Identidade Web</h2>
+        <div class="trusted-container">
+          <div class="trusted-grid">
+          <article class="trusted-item reveal" aria-label="Anadem">
+            <span class="trusted-logo">
+              <span class="trusted-mark" aria-hidden="true"></span>
+              <span class="trusted-name"><img src="./assets/anadem.png" alt="Anadem"></span>
+            </span>
+          </article>
+          <article class="trusted-item reveal reveal-delay-1" aria-label="Cirurgia Segura">
+            <span class="trusted-logo">
+              <span class="trusted-mark" aria-hidden="true"></span>
+              <span class="trusted-name"><img src="./assets/logo_seguremed.png" alt=""></span>
+            </span>
+          </article>
+          <article class="trusted-item reveal reveal-delay-2" aria-label="Escola Celus">
+            <span class="trusted-logo">
+              <span class="trusted-mark" aria-hidden="true"></span>
+              <span class="trusted-name"><img src="./assets/Logo celus (1).png" alt=""></span>
+            </span>
+          </article>
+          <article class="trusted-item reveal" aria-label="Odonto Prime">
+            <span class="trusted-logo">
+              <span class="trusted-mark" aria-hidden="true"></span>
+              <span class="trusted-name"><img src="./assets/odonto prime.png" alt=""></span>
+            </span>
+          </article>
+         <!----> <article class="trusted-item reveal reveal-delay-1" aria-label="Elite Corte">
+            <span class="trusted-logo">
+              <span class="trusted-mark" aria-hidden="true"></span>
+              <span class="trusted-name"><img src="./assets/elite corte.png" alt=""></span>
+            </span>
+          </article>
+        </div>
+        </div>
+      </div>
+    </section>
+
+
+
+
+
 
     <section class="section problem" id="problema" aria-labelledby="problema-titulo">
       <div class="container">
@@ -1115,43 +1206,7 @@
       </div>
     </section>
 
-    <section class="section trusted" id="empresas" aria-labelledby="empresas-titulo">
-      <div class="container">
-        <h2 id="empresas-titulo" class="trusted-title reveal">Empresas que já confiaram na Identidade Web</h2>
-        <div class="trusted-grid">
-          <article class="trusted-item reveal" aria-label="Anadem">
-            <span class="trusted-logo">
-              <span class="trusted-mark" aria-hidden="true"></span>
-              <span class="trusted-name"><img src="./assets/anadem.png" alt="Anadem"></span>
-            </span>
-          </article>
-          <article class="trusted-item reveal reveal-delay-1" aria-label="Cirurgia Segura">
-            <span class="trusted-logo">
-              <span class="trusted-mark" aria-hidden="true"></span>
-              <span class="trusted-name"><img src="./assets/logo_seguremed.png" alt=""></span>
-            </span>
-          </article>
-          <article class="trusted-item reveal reveal-delay-2" aria-label="Escola Celus">
-            <span class="trusted-logo">
-              <span class="trusted-mark" aria-hidden="true"></span>
-              <span class="trusted-name"><img src="./assets/Logo celus (1).png" alt=""></span>
-            </span>
-          </article>
-          <article class="trusted-item reveal" aria-label="Odonto Prime">
-            <span class="trusted-logo">
-              <span class="trusted-mark" aria-hidden="true"></span>
-              <span class="trusted-name"><img src="./assets/odonto prime.png" alt=""></span>
-            </span>
-          </article>
-         <!-- <article class="trusted-item reveal reveal-delay-1" aria-label="Elite Corte">
-            <span class="trusted-logo">
-              <span class="trusted-mark" aria-hidden="true"></span>
-              <span class="trusted-name"><img src="./assets/elite corte.png" alt=""></span>
-            </span>
-          </article>-->
-        </div>
-      </div>
-    </section>
+  
 
     <section class="section stats" id="numeros" aria-label="Números da Identidade Web">
       <div class="container">
@@ -1177,25 +1232,40 @@
         <h2 id="oferta-titulo" class="section-title reveal">Invista na sua presença digital com inteligência</h2>
         <p class="section-lead reveal">Entrada acessível para você testar a estrutura completa — com padrão premium desde o primeiro dia.</p>
         <div class="offer-wrap">
-          <div class="offer-card reveal">
-            <span class="offer-pill">Oferta especial</span>
-            <p style="font-size:1rem;opacity:.9;margin-bottom:.75rem;">Comece por apenas</p>
-            <div class="offer-price"><small>R$</small> 3,90</div>
-            <p class="offer-after">no primeiro mês · depois <strong>R$ 89/mês</strong> pela estrutura completa</p>
-            <ul class="offer-list">
-              <li><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg> Site + bio + SEO + domínio + hospedagem + e-mail</li>
-              <li><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg> Suporte e evolução contínua da sua presença</li>
-              <li><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg> Foco em conversão e negócios locais</li>
-            </ul>
-            <a class="btn btn-primary btn-lg wa-link" href="#" data-wa style="position:relative;z-index:1;">Garantir minha vaga — R$ 3,90</a>
+          <div class="offer-cards">
+            <div class="offer-card reveal">
+              <span class="offer-pill">Oferta especial</span>
+              <p style="font-size:1rem;opacity:.9;margin-bottom:.75rem;">Comece por apenas</p>
+              <div class="offer-price"><small>R$</small> 3,90</div>
+              <p class="offer-after">no primeiro mês · depois <strong>R$ 89/mês</strong> pela estrutura completa</p>
+              <ul class="offer-list">
+                <li><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg> Site + bio + SEO + domínio + hospedagem + e-mail</li>
+                <li><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg> Suporte e evolução contínua da sua presença</li>
+                <li><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg> Foco em conversão e negócios locais</li>
+              </ul>
+              <a class="btn btn-primary btn-lg wa-link" href="#" data-wa style="position:relative;z-index:1;">Garantir minha vaga — R$ 3,90</a>
+            </div>
+            <div class="offer-card reveal reveal-delay-1">
+              <span class="offer-pill">Pacote anual</span>
+              <p style="font-size:1rem;opacity:.9;margin-bottom:.75rem;">Pague por ano e economize</p>
+              <div class="offer-price"><small>R$</small> 890,00</div>
+              <p class="offer-after">por ano · <s>R$ 1.068,00</s> · economia de R$ 178,00</p>
+              <ul class="offer-list">
+                <li><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg> Site + bio + SEO + domínio + hospedagem + e-mail</li>
+                <li><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg> Suporte e evolução contínua da sua presença</li>
+                <li><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg> Foco em conversão e negócios locais</li>
+              </ul>
+              <a class="btn btn-outline btn-lg wa-link" href="#" data-wa style="position:relative;z-index:1;">Escolher pacote anual — R$ 890,00</a>
+            </div>
           </div>
-          <div class="value-stack reveal reveal-delay-1">
+          <div class="value-stack reveal reveal-delay-2">
             <h3>Valor percebido do pacote</h3>
             <div class="value-row"><span>Site profissional + bio</span><span>R$ 2.500+</span></div>
             <div class="value-row"><span>SEO e configurações técnicas</span><span>R$ 800+</span></div>
             <div class="value-row"><span>Domínio, hospedagem e e-mail (ano)</span><span>R$ 400+</span></div>
-            <div class="value-total"><span>Você começa investindo</span><span>R$ 3,90</span></div>
-            <p style="font-size:0.8125rem;color:var(--text-muted);margin-top:1rem;">Valores ilustrativos de mercado. Na Identidade Web você centraliza tudo com previsibilidade mensal.</p>
+            <div class="value-total"><span>Pacote mensal</span><span>R$ 3,90</span></div>
+            <div class="value-total"><span>Pacote anual</span><span>R$ 890,00</span></div>
+            <p style="font-size:0.8125rem;color:var(--text-muted);margin-top:1rem;">Valores ilustrativos de mercado. Na Identidade Web você centraliza tudo com previsibilidade mensal ou anual.</p>
           </div>
         </div>
       </div>
@@ -1308,6 +1378,34 @@
         statsSection.querySelectorAll('.num').forEach(function (numEl) {
           numEl.textContent = numEl.getAttribute('data-target') + (numEl.getAttribute('data-suffix') || '');
         });
+      }
+
+      // Auto-scroll trusted logos on all screen sizes
+      var trustedContainer = document.querySelector('.trusted-container');
+      if (trustedContainer) {
+        var trustedGrid = trustedContainer.querySelector('.trusted-grid');
+        if (trustedGrid && !trustedGrid.dataset.carouselReady) {
+          var logoItems = Array.from(trustedGrid.children);
+          var originalWidth = trustedGrid.scrollWidth;
+          logoItems.forEach(function (item) {
+            var clone = item.cloneNode(true);
+            clone.classList.remove('reveal', 'reveal-delay-1', 'reveal-delay-2', 'reveal-delay-3');
+            clone.classList.add('carousel-clone');
+            trustedGrid.appendChild(clone);
+          });
+          trustedGrid.dataset.carouselReady = 'true';
+          trustedContainer.scrollLeft = 0;
+
+          var scrollSpeed = 1.2;
+          function animateTrusted() {
+            trustedContainer.scrollLeft += scrollSpeed;
+            if (trustedContainer.scrollLeft >= originalWidth) {
+              trustedContainer.scrollLeft = 0;
+            }
+            requestAnimationFrame(animateTrusted);
+          }
+          animateTrusted();
+        }
       }
     })();
   </script>
