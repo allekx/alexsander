@@ -24,7 +24,7 @@
   <link rel="apple-touch-icon" href="assets/logo%20identidade%20web.png" sizes="180x180" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700&display=swap" rel="stylesheet" />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -141,67 +141,267 @@
       left: 0;
       right: 0;
       z-index: 100;
-      background: rgba(255, 255, 255, 0.92);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(10, 37, 64, 0.06);
-      transition: box-shadow var(--transition);
+      background: transparent;
+      transition: background var(--transition), box-shadow var(--transition);
     }
-    .header.scrolled { box-shadow: var(--shadow); }
+    /* Initial state: full-width white bar */
+    .header:not(.scrolled) {
+      background: var(--white);
+      box-shadow: 0 4px 24px rgba(10, 37, 64, 0.08);
+    }
+    /* Thin blue top bar (always visible) */
+    .header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-hover));
+      z-index: 2;
+    }
     .header-inner {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 0.75rem;
-      padding: 1rem 0;
+      gap: 1.5rem;
+      height: 72px;
+      padding: 0.5rem .5rem 0.5rem 1rem;
+      margin-top: 3px;
+      border-radius: 999px;
+      background: transparent;
+      border: 1px solid transparent;
+      transition: background var(--transition), border-color var(--transition), box-shadow var(--transition), padding var(--transition), border-radius 0.5s cubic-bezier(0.4, 0, 0.2, 1), width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    /* Initial state: stretched menu, near full-width (auto margin centers → 2rem each side) */
+    .header:not(.scrolled) .header-inner {
+      width: calc(100% - 4rem);
+      padding: 0.5rem 0.5rem 0.5rem 0.75rem;
+      border-radius: 0;
+    }
+    /* Scrolled: pill-shaped floating menu with white background */
+    .header.scrolled {
+      background: transparent;
+      box-shadow: none;
+    }
+    .header.scrolled .header-inner {
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-color: rgba(10, 37, 64, 0.08);
+      box-shadow: 0 12px 40px -12px rgba(10, 37, 64, 0.18);
+      padding: 0.4rem 0.5rem 0.4rem 0.6rem;
+      margin-top: 0.75rem;
     }
     .logo-link {
       display: inline-flex;
       align-items: center;
-      gap: 0.65rem;
+      gap: 0.6rem;
+      flex-shrink: 0;
       transition: opacity 0.2s ease;
     }
     .logo-link:hover { opacity: 0.9; }
     .logo-mark {
-      height: 64px;
+      height: 44px;
       width: auto;
-      max-width: min(96px, 18vw);
+      max-width: 60px;
       object-fit: contain;
       object-position: left center;
       display: block;
       flex-shrink: 0;
     }
     .logo-text {
-      font-family: 'Poppins', sans-serif;
+      font-family: 'Sora', sans-serif;
       font-weight: 700;
-      font-size: clamp(0.95rem, 3.2vw, 1.125rem);
+      font-size: 1.05rem;
       letter-spacing: -0.02em;
       color: var(--navy);
       line-height: 1.2;
       white-space: nowrap;
     }
     .logo-text span { color: var(--accent); }
-    .nav-cta {
+
+    /* Main navigation */
+    .main-nav {
+      display: flex;
+      align-items: center;
+      gap: 1.9rem;
+    }
+    .main-nav a {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--navy);
+      opacity: 0.78;
+      position: relative;
+      padding: 0.25rem 0;
+      white-space: nowrap;
+      transition: color var(--transition), opacity var(--transition);
+    }
+    .main-nav a::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 100%;
+      bottom: 0;
+      height: 2px;
+      border-radius: 2px;
+      background: var(--accent);
+      transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .main-nav a:hover { opacity: 1; color: var(--accent); }
+    .main-nav a:hover::after { right: 0; }
+
+    .main-nav .nav-cta {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      padding: 0.65rem 1.25rem;
+      gap: 0.55rem;
+      padding: 0.55rem 1.25rem 0.55rem 1.1rem;
       font-weight: 600;
       font-size: 0.875rem;
-      background: var(--accent);
-      color: var(--white);
+      color: var(--navy);
+      opacity: 1;
+      background: linear-gradient(180deg, rgba(59, 130, 246, 0.12), rgba(59, 130, 246, 0.05));
+      border: 1px solid rgba(59, 130, 246, 0.28);
+      border-bottom: none;
       border-radius: 999px;
-      transition: background var(--transition), transform 0.2s ease, box-shadow var(--transition);
+      white-space: nowrap;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7), 0 2px 8px rgba(59, 130, 246, 0.08);
+      transition: color var(--transition), background var(--transition), border-color var(--transition), box-shadow var(--transition), transform 0.2s ease;
     }
-    .nav-cta:hover {
-      background: var(--accent-hover);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(59, 130, 246, 0.35);
+    .main-nav .nav-cta::after { display: none; }
+    .main-nav .nav-cta svg {
+      width: 16px;
+      height: 16px;
+      color: var(--whatsapp);
+      flex-shrink: 0;
+      transition: color var(--transition);
     }
-    @media (max-width: 407px) {
-      .nav-cta {
-        display: none;
+    .main-nav .nav-cta:hover {
+      color: var(--white);
+      background: linear-gradient(180deg, #4C92F7 0%, var(--accent) 45%, #2F6FE4 100%);
+      border-color: transparent;
+      transform: translateY(-1px);
+      box-shadow: 0 10px 24px rgba(59, 130, 246, 0.32), inset 0 1px 0 rgba(255, 255, 255, 0.22);
+    }
+    .main-nav .nav-cta:hover svg { color: var(--white); }
+    .main-nav .nav-cta:active {
+      transform: translateY(0);
+      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.24);
+    }
+
+    /* Mobile menu */
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 42px;
+      height: 42px;
+      padding: 10px;
+      background: transparent;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    .nav-toggle span {
+      display: block;
+      height: 2px;
+      width: 100%;
+      background: var(--navy);
+      border-radius: 2px;
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s ease;
+    }
+    .nav-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+    .nav-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .nav-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(10, 37, 64, 0.4);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      z-index: 80;
+    }
+    .nav-overlay.show { opacity: 1; pointer-events: auto; }
+
+    /* Mobile drawer header (hidden on desktop) */
+    .nav-mobile-head {
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-mobile-brand {
+      font-family: 'Sora', sans-serif;
+      font-weight: 700;
+      font-size: 1.125rem;
+      color: var(--navy);
+    }
+    .nav-close {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      padding: 0;
+      background: transparent;
+      border: none;
+      border-radius: 50%;
+      color: var(--navy);
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+    .nav-close svg {
+      width: 22px;
+      height: 22px;
+    }
+    .nav-close:hover {
+      background: rgba(10, 37, 64, 0.06);
+      transform: rotate(90deg);
+    }
+
+    @media (max-width: 900px) {
+      .header:not(.scrolled) .header-inner { height: 64px; padding: 0.35rem 0.5rem 0.35rem 0.75rem; }
+      .header.scrolled .header-inner { height: 64px; padding: 0.35rem 0.4rem 0.35rem 0.75rem; margin-top: 0.6rem; }
+      .logo-mark { height: 38px; }
+      .main-nav {
+        position: fixed;
+        top: 0;
+        right: 0;
+        height: 100dvh;
+        width: min(320px, 82vw);
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: stretch;
+        gap: 0;
+        background: var(--white);
+        box-shadow: -16px 0 48px rgba(10, 37, 64, 0.12);
+        padding: 1rem 1.75rem 2rem;
+        transform: translateX(100%);
+        transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 90;
+        overflow-y: auto;
       }
+      .main-nav.open { transform: translateX(0); }
+      .nav-mobile-head {
+        display: flex;
+        margin-bottom: 1rem;
+      }
+      .main-nav a {
+        width: 100%;
+        padding: 1rem 0;
+        font-size: 1.05rem;
+        border-bottom: 1px solid rgba(10, 37, 64, 0.06);
+      }
+      .main-nav a::after { display: none; }
+      .main-nav .nav-cta {
+        margin-top: 1.5rem;
+        width: 100%;
+        justify-content: center;
+      }
+      .nav-toggle { display: flex; }
     }
 
     /* Buttons */
@@ -209,97 +409,291 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 0.5rem;
+      gap: 0.55rem;
       padding: 1rem 1.75rem;
       font-weight: 600;
       font-size: 1rem;
+      line-height: 1.2;
       border-radius: 999px;
       border: none;
       cursor: pointer;
-      transition: transform 0.2s ease, box-shadow var(--transition), background var(--transition);
+      text-align: center;
+      transition: transform 0.2s ease, box-shadow var(--transition), background var(--transition), border-color var(--transition);
     }
     .btn-primary {
-      background: var(--accent);
+      background: linear-gradient(180deg, #4C92F7 0%, var(--accent) 45%, #2F6FE4 100%);
       color: var(--white);
-      box-shadow: 0 4px 20px rgba(59, 130, 246, 0.35);
+      box-shadow: 0 4px 20px rgba(59, 130, 246, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.22);
     }
     .btn-primary:hover {
-      background: var(--accent-hover);
       transform: translateY(-3px);
-      box-shadow: 0 12px 32px rgba(59, 130, 246, 0.4);
+      box-shadow: 0 12px 32px rgba(59, 130, 246, 0.42), inset 0 1px 0 rgba(255, 255, 255, 0.22);
+    }
+    .btn-primary:active {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 18px rgba(59, 130, 246, 0.36), inset 0 1px 0 rgba(255, 255, 255, 0.22);
     }
     .btn-lg {
       padding: 1.15rem 2.25rem;
       font-size: 1.0625rem;
     }
+    .btn-secondary {
+      background: var(--white);
+      color: var(--navy);
+      border: 1px solid rgba(10, 37, 64, 0.14);
+      box-shadow: 0 2px 8px rgba(10, 37, 64, 0.04);
+    }
+    .btn-secondary:hover {
+      transform: translateY(-3px);
+      border-color: rgba(59, 130, 246, 0.4);
+      box-shadow: 0 10px 24px rgba(10, 37, 64, 0.1);
+    }
     .btn-outline {
-      margin-top: 1rem;
       color: var(--accent);
-      border: 2px solid rgba(10, 37, 64, 0.15);
-      border-color: var(--accent);
+      border: 2px solid rgba(59, 130, 246, 0.45);
+      background: transparent;
     }
     .btn-outline:hover {
-      
-      background: #3b82f6;
-      color: #FFFFFF;
+      background: var(--accent);
+      color: var(--white);
       transform: translateY(-2px);
+      box-shadow: 0 10px 26px rgba(59, 130, 246, 0.32);
+    }
+    @media (max-width: 640px) {
+      .btn { width: 100%; max-width: 100%; padding: 0.95rem 1.25rem; }
+      .btn-lg { padding: 1rem 1.25rem; font-size: 1rem; }
     }
 
     /* Hero */
     .hero {
-      padding: 7rem 0 4rem;
-      background: linear-gradient(180deg, var(--gray-bg) 0%, var(--white) 100%);
+      position: relative;
+      overflow: hidden;
+      padding: 8.5rem 0 5rem;
+      background:
+        radial-gradient(1100px 520px at 88% -10%, rgba(59, 130, 246, 0.28), transparent 60%),
+        radial-gradient(800px 480px at -10% 110%, rgba(59, 130, 246, 0.16), transparent 60%),
+        linear-gradient(180deg, #0B1F38 0%, #0A2540 60%, #0D2B4E 100%);
     }
-    @media (min-width: 768px) {
-      .hero { padding: 8rem 0 1.2rem; }
+    @media (min-width: 900px) {
+      .hero { padding: 9rem 0 6rem; }
     }
     .hero-grid {
       display: grid;
-      gap: 1rem;
+      gap: 3.5rem;
       align-items: center;
-      margin-top: 0.1rem;
     }
     @media (min-width: 900px) {
       .hero-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 3rem;
+        grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+        gap: 4rem;
+        margin-top: -4rem;
+        margin-bottom: -5rem;
       }
     }
     .hero-badge {
-      display: inline-block;
-      padding: 0.35rem 0.85rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.4rem 0.95rem;
       font-size: 0.75rem;
       font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      color: var(--accent);
-      background: rgba(59, 130, 246, 0.1);
+      letter-spacing: 0.04em;
+      color: #93C5FD;
+      background: rgba(59, 130, 246, 0.14);
+      border: 1px solid rgba(96, 165, 250, 0.3);
       border-radius: 999px;
-      margin-bottom: 1.2rem;
+      margin-bottom: 1.4rem;
+      white-space: nowrap;
+    }
+    @media (max-width: 420px) {
+      .hero-badge {
+        white-space: normal;
+        line-height: 1.4;
+      }
+    }
+    .hero-badge::before {
+      content: '';
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
     }
     .hero h1 {
-      font-family: 'Poppins', sans-serif;
-      font-size: clamp(1.75rem, 5vw, 2.75rem);
+      font-family: 'Sora', sans-serif;
+      font-size: clamp(2.05rem, 4.6vw, 3.15rem);
       font-weight: 700;
-      line-height: 1.15;
-      letter-spacing: -0.02em;
-      margin-bottom: 1.25rem;
-      color: var(--navy);
+      line-height: 1.14;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.35rem;
+      color: var(--white);
+      max-width: 13ch;
     }
     .hero h1 em {
       font-style: normal;
-      color: var(--accent);
+      background: linear-gradient(120deg, #60A5FA 0%, #93C5FD 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
     .hero-sub {
-      font-size: 1.0625rem;
-      color: var(--text-muted);
-      max-width: 32rem;
-      margin-bottom: 2rem;
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: rgba(226, 232, 240, 0.8);
+      max-width: 30rem;
+      margin-bottom: 2.1rem;
     }
+    .hero-sub strong { color: var(--white); font-weight: 600; }
     .hero-ctas {
       display: flex;
       flex-wrap: wrap;
+      align-items: center;
       gap: 1rem;
+      margin-bottom: 2.1rem;
+    }
+
+    /* Trust indicators */
+    .hero-trust {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.9rem 1.75rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+    }
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      font-size: 0.84rem;
+      font-weight: 500;
+      color: rgba(226, 232, 240, 0.85);
+    }
+    .trust-item svg {
+      width: 16px;
+      height: 16px;
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+
+    /* Hero visual */
+    .hero-visual {
+      position: relative;
+      display: flex;
+      justify-content: center;
+    }
+    .hero-media {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 560px;
+      border-radius: 24px;
+      overflow: hidden;
+      
+    }
+    .hero-media img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    /* Soft blue glow behind the media */
+    .hero-media::before {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      border-radius: 26px;
+      background: radial-gradient(60% 55% at 50% 30%, rgba(59, 130, 246, 0.3), transparent 70%);
+      z-index: -1;
+      pointer-events: none;
+    }
+    /* Ambient blurred blob behind the card */
+    .hero-visual::before {
+      content: '';
+      position: absolute;
+      top: 8%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 86%;
+      height: 78%;
+      background: radial-gradient(circle, rgba(59, 130, 246, 0.3) 0%, transparent 68%);
+      filter: blur(38px);
+      z-index: 0;
+    }
+    /* Floating chip */
+    .hero-chip {
+      position: absolute;
+      z-index: 2;
+      top: 6%;
+      right: -4%;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.6rem 1rem;
+      background: rgba(255, 255, 255, 0.95);
+      border: 1px solid rgba(10, 37, 64, 0.08);
+      border-radius: 14px;
+      box-shadow: 0 12px 32px -8px rgba(10, 37, 64, 0.22);
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--navy);
+      animation: floatChip 6s ease-in-out infinite;
+    }
+    .hero-chip .chip-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #22C55E;
+      box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.18);
+    }
+    /* Floating tech element */
+    .hero-float {
+      position: absolute;
+      z-index: 2;
+      left: -5%;
+      bottom: 12%;
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      padding: 0.55rem 0.95rem;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 14px;
+      box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.45);
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--white);
+      animation: floatChip 7s ease-in-out 0.8s infinite;
+    }
+    .hero-float svg {
+      width: 18px;
+      height: 18px;
+      color: var(--accent);
+    }
+    @keyframes floatChip {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    /* Responsive hero */
+    @media (max-width: 899px) {
+      .hero-visual { order: -1; margin-top: 0.5rem; }
+      .hero-copy { order: 2; }
+      .hero-media { max-width: 460px; }
+      .hero-chip { right: 2%; }
+      .hero-float { left: 2%; }
+      .hero h1 { max-width: 100%; }
+    }
+    @media (max-width: 640px) {
+      .hero { padding: 7rem 0 3.5rem; }
+      .hero h1 { font-size: clamp(1.85rem, 8vw, 2.4rem); }
+      .hero-ctas { flex-direction: column; align-items: stretch; }
+      .hero-ctas .btn { width: 100%; max-width: 100%; }
+      .hero-trust { gap: 0.8rem 1rem; }
+      .hero-visual { margin-top: 0.25rem; }
+      .hero-chip { top: 4%; right: 1%; }
+      .hero-float { left: 1%; bottom: 10%; }
     }
 
     /* Mockup */
@@ -357,7 +751,7 @@
       flex-shrink: 0;
     }
     .mockup-brand .mockup-brand-name {
-      font-family: 'Poppins', sans-serif;
+      font-family: 'Sora', sans-serif;
       font-weight: 700;
       font-size: 0.8rem;
       color: var(--navy);
@@ -389,7 +783,7 @@
       .section { padding: 5.5rem 0; }
     }
     .section-title {
-      font-family: 'Poppins', sans-serif;
+      font-family: 'Sora', sans-serif;
       font-size: clamp(1.5rem, 4vw, 2.125rem);
       font-weight: 700;
       text-align: center;
@@ -402,7 +796,7 @@
       text-align: center;
       color: var(--text-muted);
       max-width: 34rem;
-      margin-inline: auto 2.5rem;
+      margin-inline: auto;
     }
 
     /* Problem */
@@ -439,7 +833,7 @@
       color: var(--accent);
     }
     .problem-card h3 {
-      font-family: 'Poppins', sans-serif;
+      font-family: 'Sora', sans-serif;
       font-size: 1.125rem;
       margin-bottom: 0.5rem;
     }
@@ -498,7 +892,7 @@
       margin-bottom: 1rem;
     }
     .benefit-card h3 {
-      font-family: 'Poppins', sans-serif;
+      font-family: 'Sora', sans-serif;
       font-size: 1rem;
       margin-bottom: 0.35rem;
     }
@@ -545,7 +939,7 @@
       transform: scale(1.05);
     }
     .service-card h3 {
-      font-family: 'Poppins', sans-serif;
+      font-family: 'Sora', sans-serif;
       font-size: 1.0625rem;
       margin-bottom: 0.5rem;
     }
@@ -619,7 +1013,7 @@
     }
     .trusted-title {
       text-align: center;
-      font-family: 'Poppins', sans-serif;
+      font-family: 'Sora', sans-serif;
       font-size: clamp(1.12rem, 2.6vw, 1.35rem);
       font-weight: 600;
       letter-spacing: -0.01em;
@@ -732,7 +1126,7 @@
       .stats-grid { grid-template-columns: repeat(3, 1fr); gap: 2.5rem; }
     }
     .stat-item .num {
-      font-family: 'Poppins', sans-serif;
+      font-family: 'Sora', sans-serif;
       font-size: clamp(2.25rem, 6vw, 3.25rem);
       font-weight: 700;
       color: var(--accent);
@@ -768,6 +1162,12 @@
       position: relative;
       overflow: hidden;
     }
+    @media (max-width: 480px) {
+      .offer-card { padding: 1.75rem 1.25rem; }
+      .offer-price { font-size: clamp(2.25rem, 10vw, 3rem); }
+      .offer-card .btn { width: 100%; }
+      .value-stack { padding: 1.5rem 1.25rem; }
+    }
     .offer-card::before {
       content: '';
       position: absolute;
@@ -790,7 +1190,7 @@
       margin-bottom: 1.25rem;
     }
     .offer-price {
-      font-family: 'Poppins', sans-serif;
+      font-family: 'Sora', sans-serif;
       font-size: clamp(2.5rem, 8vw, 3.5rem);
       font-weight: 700;
       line-height: 1;
@@ -826,7 +1226,7 @@
       border: 1px dashed rgba(10, 37, 64, 0.15);
     }
     .value-stack h3 {
-      font-family: 'Poppins', sans-serif;
+      font-family: 'Sora', sans-serif;
       font-size: 1.125rem;
       margin-bottom: 1rem;
     }
@@ -861,7 +1261,7 @@
       background: linear-gradient(180deg, var(--white) 0%, var(--gray-bg) 100%);
     }
     .cta-final h2 {
-      font-family: 'Poppins', sans-serif;
+      font-family: 'Sora', sans-serif;
       font-size: clamp(1.5rem, 4vw, 2.25rem);
       margin-bottom: 1rem;
       max-width: 28rem;
@@ -871,6 +1271,9 @@
       color: var(--text-muted);
       max-width: 26rem;
       margin: 0 auto 2rem;
+    }
+    @media (max-width: 640px) {
+      .cta-final { padding: 3.5rem 0; }
     }
 
     /* Footer */
@@ -895,7 +1298,7 @@
       }
     }
     .footer-brand {
-      font-family: 'Poppins', sans-serif;
+      font-family: 'Sora', sans-serif;
       font-weight: 700;
       font-size: 1.125rem;
       color: var(--white);
@@ -948,178 +1351,146 @@
   </style>
 </head>
 <body>
-  <a class="skip-link" href="#conteudo-principal">Ir para o conteúdo</a>
 
   <header class="header" id="header">
     <div class="container header-inner">
       <a href="https://identidadeweb.com/" class="logo-link" aria-label="Identidade Web, Início">
-        <img class="logo-mark" src="assets/logo%20identidade%20web.png" alt="Identidade Web, criação de sites e estrutura digital para negócios locais" width="64" height="64" decoding="async" />
+        <img class="logo-mark" src="assets/logo%20identidade%20web.png" alt="Identidade Web, criação de sites e estrutura digital para negócios locais" width="44" height="44" decoding="async" />
         <span class="logo-text">Identidade <span>Web</span></span>
       </a>
-      <a class="nav-cta wa-link" href="#" data-wa>Falar no WhatsApp</a>
+
+      <nav class="main-nav" id="main-nav" aria-label="Navegação principal">
+        <div class="nav-mobile-head">
+          <span class="nav-mobile-brand">Menu</span>
+          <button class="nav-close" id="nav-close" aria-label="Fechar menu">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+          </button>
+        </div>
+        <a href="#solucao">Solução</a>
+        <a href="#servicos">Serviços</a>
+        <a href="#depoimentos">Resultados</a>
+        <a href="#contato">Contato</a>
+        <a class="nav-cta wa-link" href="#" data-wa><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.881 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>WhatsApp</a>
+      </nav>
+
+      <button class="nav-toggle" id="nav-toggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="main-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
     </div>
   </header>
+  <div class="nav-overlay" id="nav-overlay"></div>
 
   <main id="conteudo-principal">
     <section class="hero">
       <div class="container hero-grid">
-        <div>
-          <p class="hero-badge reveal">Criação de sites e estrutura digital para negócios locais</p>
-          <h1 class="reveal reveal-delay-1">A sua empresa ainda <em>não existe na internet</em> do jeito certo.</h1>
-          <p class="hero-sub reveal reveal-delay-2">A Identidade Web entrega <strong>criação de site profissional</strong>, <strong>link na bio personalizado</strong> e <strong>presença digital para empresas</strong> no Google e no Instagram, com SEO, domínio e hospedagem, para <strong>pequenas empresas e negócios locais</strong> atraírem clientes todos os dias, sem complicação.</p>
+        <div class="hero-copy">
+          <p class="hero-badge reveal">Sites profissionais · Presença digital</p>
+          <h1 class="reveal reveal-delay-1">Seu negócio <em>no Google</em> e no Instagram, com autoridade.</h1>
+          <p class="hero-sub reveal reveal-delay-2">Site, link na bio, SEO e domínio em um só lugar, pronto para atrair clientes.</p>
           <div class="hero-ctas reveal reveal-delay-3">
-            <a class="btn btn-primary wa-link" href="#" data-wa>Quero minha estrutura digital</a>
+            <a class="btn btn-primary btn-lg wa-link" href="#" data-wa>Quero minha estrutura digital</a>
+          </div>
+          <div class="hero-trust reveal reveal-delay-3">
+            <span class="trust-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              Presença digital completa
+            </span>
+            <span class="trust-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+              SEO para Google
+            </span>
+            <span class="trust-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              Atendimento personalizado
+            </span>
           </div>
         </div>
 
-
-        <img src="./assets/identidade web funcionalidades.png" alt="Identidade Web" style="border-radius: 12px;">
-     <!-- <div class="mockup-wrap reveal">
-          <div class="mockup" aria-hidden="true">
-            <div class="mockup-bar">
-              <span class="mockup-dot"></span>
-              <span class="mockup-dot"></span>
-              <span class="mockup-dot"></span>
-            </div>
-            <div class="mockup-screen">
-              <div class="mockup-screen-inner">
-                <div class="mockup-brand">
-                  <img src="assets/logo%20identidade%20web.png" alt="Logo Identidade Web" width="32" height="32" decoding="async" />
-                  <span class="mockup-brand-name">Identidade <em>Web</em></span>
-                </div>
-                <div class="mockup-blocks">
-                  <div class="mockup-block w-80"></div>
-                  <div class="mockup-block w-60"></div>
-                  <div class="mockup-block accent"></div>
-                  <div class="mockup-block w-80"></div>
-                  <div class="mockup-block w-60"></div>
-                </div>
-                <img src="./assets/Appointment.gif" alt="" style="height: 20%; display: inline; margin-left: 1rem; margin-top: 2.5rem;">
-                <img src="./assets/Creative.gif" alt="" style="height: 20%; display: inline;">
-                <img src="./assets/Social Media.gif" alt="" style="height: 20%; display: inline;">
-                <img src="./assets/Website SEO Audit.gif" alt="SEO" style="height: 20%; display: inline;">
-                <img src="./assets/social media redes.gif" alt="SEO" style="height: 20%; display: inline;">
-              </div>
-              
-            </div>
+        <div class="hero-visual reveal reveal-delay-2">
+          <div class="hero-chip" aria-hidden="true">
+            <span class="chip-dot"></span>
+            Online e no Google
           </div>
-        </div>-->
+          <div class="hero-float" aria-hidden="true">
+           
+            Sites que convertem
+          </div>
+          <div class="hero-media">
+            <img src="./assets/identidadeweb modelo.png" alt="Ilustração animada de presença digital da Identidade Web: site profissional, link na bio e SEO para negócios locais" decoding="async" />
+          </div>
+        </div>
       </div>
     </section>
 
-
-
-
-
-
-
-
-
     <section class="section problem" id="problema" aria-labelledby="problema-titulo">
       <div class="container">
-        <h2 id="problema-titulo" class="section-title reveal">Enquanto isso, a concorrência aparece. <br>E você?</h2>
-        <p class="section-lead reveal">Negócios locais sem estrutura digital perdem visibilidade, credibilidade e vendas, todos os dias.</p>
+        <h2 id="problema-titulo" class="section-title reveal">A concorrência aparece. E você?</h2>
+        <p class="section-lead reveal">Sem presença digital, seu negócio perde clientes todos os dias.</p>
         <div class="problem-grid">
           <article class="problem-card reveal">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
             <h3>Sem site profissional</h3>
-            <p>Clientes pesquisam no Google antes de ir até você. Sem um site sério, a dúvida vence a confiança.</p>
+            <p>Clientes pesquisam antes de ir até você. Sem um site sério, a confiança fica pela metade.</p>
           </article>
           <article class="problem-card reveal reveal-delay-1">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
             <h3>Invisível no Google</h3>
-            <p>Quem não otimiza para busca fica fora dos resultados, e quem busca, encontra o concorrente.</p>
+            <p>Quem busca encontra o concorrente, não você.</p>
           </article>
           <article class="problem-card reveal reveal-delay-2">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6"/></svg>
             <h3>Clientes escapando</h3>
-            <p>Cada dia sem presença digital é receita na mesa do outro. O custo é silencioso, mas alto.</p>
+            <p>Cada dia sem presença digital é receita na mesa do outro.</p>
           </article>
         </div>
       </div>
     </section>
 
 
-          <section class="section trusted" id="empresas" aria-labelledby="empresas-titulo">
-      <div class="container" style="width: min(93%, 100% - 2rem)">
-        <h2 id="empresas-titulo" class="trusted-title reveal">Empresas que já confiaram na Identidade Web</h2>
-        <div class="trusted-container">
-          <div class="trusted-grid">
-          <article class="trusted-item reveal" aria-label="Anadem">
-            <span class="trusted-logo">
-              <span class="trusted-mark" aria-hidden="true"></span>
-              <span class="trusted-name"><img src="./assets/anadem.png" alt="Anadem"></span>
-            </span>
-          </article>
-          <article class="trusted-item reveal reveal-delay-1" aria-label="Cirurgia Segura">
-            <span class="trusted-logo">
-              <span class="trusted-mark" aria-hidden="true"></span>
-              <span class="trusted-name"><img src="./assets/logo_seguremed.png" alt=""></span>
-            </span>
-          </article>
-          <article class="trusted-item reveal reveal-delay-2" aria-label="Escola Celus">
-            <span class="trusted-logo">
-              <span class="trusted-mark" aria-hidden="true"></span>
-              <span class="trusted-name"><img src="./assets/Logo celus (1).png" alt=""></span>
-            </span>
-          </article>
-          <article class="trusted-item reveal" aria-label="Odonto Prime">
-            <span class="trusted-logo">
-              <span class="trusted-mark" aria-hidden="true"></span>
-              <span class="trusted-name"><img src="./assets/odonto prime.png" alt=""></span>
-            </span>
-          </article>
-         <!----> <article class="trusted-item reveal reveal-delay-1" aria-label="Elite Corte">
-            <span class="trusted-logo">
-              <span class="trusted-mark" aria-hidden="true"></span>
-              <span class="trusted-name"><img src="./assets/elite corte.png" alt=""></span>
-            </span>
-          </article>
-        </div>
-        </div>
-      </div>
-    </section>
+    
 
 
 
 
     <section class="section" id="solucao" aria-labelledby="solucao-titulo">
       <div class="container">
-        <h2 id="solucao-titulo" class="section-title reveal">Estrutura digital para empresas: a Identidade Web deixa você pronto para vender.</h2>
-        <p class="section-lead reveal">Unimos <strong>criação de site</strong>, <strong>link na bio</strong>, SEO para Google, domínio, hospedagem e e-mail profissional em um pacote pensado para <strong>negócios locais</strong> e <strong>pequenas empresas</strong> que querem crescer com autoridade.</p>
+        <h2 id="solucao-titulo" class="section-title reveal">Tudo o que seu negócio precisa, em um só lugar.</h2>
+        <p class="section-lead reveal">Site, link na bio, SEO, domínio e hospedagem - você cuida do atendimento, nós cuidamos da presença digital.</p>
         <div class="solution-box reveal">
-          <p><strong>Um parceiro, um fluxo, um resultado:</strong> você foca no atendimento e na operação; nós colocamos o seu negócio no mapa digital com padrão de agência premium, rápido, organizado e focado em conversão.</p>
+          <p><strong>Um parceiro, um fluxo, um resultado:</strong> seu negócio no mapa digital com padrão de agência premium, focado em conversão.</p>
 
         <h3 class="section-title reveal" style="margin-top: 3.5rem; font-size: 1.5rem;">O que você ganha</h3>
-        <p class="section-lead reveal" style="margin-bottom: 0;">Benefícios diretos no bolso e na reputação.</p>
+        <p class="section-lead reveal" style="margin-bottom: 0;">Benefícios diretos para o seu negócio.</p>
         <div class="benefits-grid">
           <article class="benefit-card reveal">
             <div class="benefit-icon" aria-hidden="true">
               <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
             </div>
             <h3>Mais clientes</h3>
-            <p>Seja encontrado quando alguém buscar o que você oferece na sua região.</p>
+            <p>Apareça quando alguém buscar o que você oferece.</p>
           </article>
           <article class="benefit-card reveal reveal-delay-1">
             <div class="benefit-icon" aria-hidden="true">
               <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>
             </div>
             <h3>Mais autoridade</h3>
-            <p>Site e comunicação alinhados passam segurança e fecham mais negócios.</p>
+            <p>Comunicação alinhada transmite segurança.</p>
           </article>
           <article class="benefit-card reveal reveal-delay-2">
             <div class="benefit-icon" aria-hidden="true">
               <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
             </div>
             <h3>Presença profissional</h3>
-            <p>Do primeiro clique ao contato: tudo com cara de empresa séria e estabelecida.</p>
+            <p>Do primeiro clique ao contato, tudo com cara de empresa séria.</p>
           </article>
           <article class="benefit-card reveal reveal-delay-3">
             <div class="benefit-icon" aria-hidden="true">
               <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"/></svg>
             </div>
             <h3>Facilidade total</h3>
-            <p>Domínio, hospedagem e e-mail na mesma solução, sem virar refém de dezenas de ferramentas.</p>
+            <p>Domínio, hospedagem e e-mail na mesma solução.</p>
           </article>
         </div>
       </div>
@@ -1127,50 +1498,50 @@
 
     <section class="section" id="servicos" aria-labelledby="servicos-titulo" style="background: var(--gray-bg);">
       <div class="container">
-        <h2 id="servicos-titulo" class="section-title reveal">Criação de site profissional, link na bio e presença digital completa</h2>
-        <p class="section-lead reveal">Serviços integrados de <strong>site para negócios locais</strong> e <strong>presença digital para empresas</strong>: você aparece, é encontrado no Google e converte visitas em clientes.</p>
+        <h2 id="servicos-titulo" class="section-title reveal">Estrutura digital completa para o seu negócio</h2>
+        <p class="section-lead reveal">Tudo que você precisa para aparecer, ser encontrado e converter.</p>
         <div class="services-grid">
           <article class="service-card reveal">
             <div class="icon-wrap" aria-hidden="true">
               <svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/></svg>
             </div>
-            <h3>Criação de site profissional</h3>
-            <p>Layout moderno, rápido no celular e pensado para gerar contato e confiança.</p>
+            <h3>Site profissional</h3>
+            <p>Moderno, rápido e pensado para gerar contato e confiança.</p>
           </article>
           <article class="service-card reveal reveal-delay-1">
             <div class="icon-wrap" aria-hidden="true">
               <svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/></svg>
             </div>
-            <h3>Link na bio personalizado</h3>
-            <p>Página de bio profissional: Instagram, WhatsApp, promoções e destaques em um só lugar, estilo link na bio de alta conversão.</p>
+            <h3>Link na bio</h3>
+            <p>Página de bio profissional para o Instagram, com alta conversão.</p>
           </article>
           <article class="service-card reveal reveal-delay-2">
             <div class="icon-wrap" aria-hidden="true">
               <svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
             </div>
             <h3>SEO para Google</h3>
-            <p>Otimização para buscas locais e boas práticas para subir relevância com o tempo.</p>
+            <p>Otimização para buscas locais e mais relevância com o tempo.</p>
           </article>
           <article class="service-card reveal">
             <div class="icon-wrap" aria-hidden="true">
               <svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/></svg>
             </div>
-            <h3>Registro de domínio</h3>
-            <p>Seu endereço na web com a cara do negócio, profissional e memorável.</p>
+            <h3>Domínio</h3>
+            <p>Seu endereço na web com a cara do negócio.</p>
           </article>
           <article class="service-card reveal reveal-delay-1">
             <div class="icon-wrap" aria-hidden="true">
               <svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01"/></svg>
             </div>
             <h3>Hospedagem</h3>
-            <p>Infraestrutura estável para seu site no ar, seguro e com boa performance.</p>
+            <p>Site no ar, seguro e com boa performance.</p>
           </article>
           <article class="service-card reveal reveal-delay-2">
             <div class="icon-wrap" aria-hidden="true">
               <svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
             </div>
             <h3>E-mail profissional</h3>
-            <p>contato@identidadeweb.com, credibilidade em cada mensagem enviada.</p>
+            <p>Credibilidade em cada mensagem enviada.</p>
           </article>
         </div>
       </div>
@@ -1279,13 +1650,9 @@
             <div class="value-row"><span>SEO e configurações técnicas</span><span>R$ 800+</span></div>
             <div class="value-row"><span>Domínio, hospedagem e e-mail (ano)</span><span>R$ 400+</span></div>
             <div class="value-total"><span>Pacote mensal</span><span>R$ 3,90</span></div>
-            <p style="font-size:0.8125rem;color:var(--text-muted);margin-top:1rem;">Comece por apenas
-
-R$ 3,90
-no primeiro mês · depois R$ 89/mês pela estrutura completa</p>
-          
+            <p style="font-size:0.8125rem;color:var(--text-muted);margin-top:1rem;">Comece por apenas R$ 3,90 no primeiro mês · depois R$ 89/mês.</p>
             <div class="value-total"><span>Pacote anual</span><span>R$ 890,00</span></div>
-            <p style="font-size:0.8125rem;color:var(--text-muted);margin-top:1rem;">Valores ilustrativos de mercado. Na Identidade Web você centraliza tudo com previsibilidade mensal ou anual.</p>
+            <p style="font-size:0.8125rem;color:var(--text-muted);margin-top:1rem;">Valores ilustrativos de mercado.</p>
           </div>
         </div>
       </div>
@@ -1294,11 +1661,11 @@ no primeiro mês · depois R$ 89/mês pela estrutura completa</p>
     <section class="cta-final" id="contato" aria-labelledby="cta-final-titulo">
       <div class="container">
         <h2 id="cta-final-titulo" class="reveal">Pronto para existir na internet do jeito certo?</h2>
-        <p class="reveal">Fale com a Identidade Web no WhatsApp e receba o próximo passo para colocar o seu negócio no Google e no Instagram com estrutura profissional.</p>
+        <p class="reveal">Fale conosco e coloque seu negócio no Google e no Instagram com estrutura profissional.</p>
         <a class="btn btn-primary btn-lg wa-link reveal reveal-delay-1" href="#" data-wa>Quero minha estrutura digital agora</a>
       </div>
     </section>
-    <iframe aria-label='Entre em Contato' frameborder="0" style="height:500px;width:99%;border:none;" src='https://forms.zohopublic.com/contatoidenti1/form/PartnershipInquiryForm/formperma/RSjr6u_GCC7MPBTK-fJA3vc2InqcyBUrtEtasF_Nz3c'></iframe>
+    <iframe aria-label='Entre em Contato' frameborder="0" style="display:block;height:500px;width:100%;max-width:100%;border:none;" src='https://forms.zohopublic.com/contatoidenti1/form/PartnershipInquiryForm/formperma/RSjr6u_GCC7MPBTK-fJA3vc2InqcyBUrtEtasF_Nz3c'></iframe>
   </main>
 
   <footer class="footer">
@@ -1331,6 +1698,37 @@ no primeiro mês · depois R$ 89/mês pela estrutura completa</p>
       document.querySelectorAll('.wa-link').forEach(function (el) {
         el.setAttribute('href', buildWhatsAppUrl());
       });
+
+      // Mobile menu
+      var navToggle = document.getElementById('nav-toggle');
+      var navMenu = document.getElementById('main-nav');
+      var navOverlay = document.getElementById('nav-overlay');
+      function closeMenu() {
+        if (!navMenu.classList.contains('open')) return;
+        navMenu.classList.remove('open');
+        navOverlay.classList.remove('show');
+        navToggle.setAttribute('aria-expanded', 'false');
+        navToggle.setAttribute('aria-label', 'Abrir menu');
+        document.body.style.overflow = '';
+      }
+      if (navToggle && navMenu) {
+        navToggle.addEventListener('click', function () {
+          var open = navMenu.classList.toggle('open');
+          navOverlay.classList.toggle('show', open);
+          navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+          navToggle.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
+          document.body.style.overflow = open ? 'hidden' : '';
+        });
+        navMenu.querySelectorAll('a').forEach(function (link) {
+          link.addEventListener('click', closeMenu);
+        });
+        var navClose = document.getElementById('nav-close');
+        if (navClose) navClose.addEventListener('click', closeMenu);
+        if (navOverlay) navOverlay.addEventListener('click', closeMenu);
+        document.addEventListener('keydown', function (e) {
+          if (e.key === 'Escape') closeMenu();
+        });
+      }
 
       document.getElementById('ano').textContent = new Date().getFullYear();
 
