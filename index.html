@@ -1016,110 +1016,63 @@
     }
     .stars { color: #FBBF24; font-size: 0.875rem; letter-spacing: 0.05em; margin-bottom: 0.75rem; }
 
-    /* Client logos */
-    .trusted {
-      background: #FAFBFC;
-      padding-top: 2rem;
+    /* Client logos marquee */
+    .logos-strip {
+      position: relative;
+      padding: 2.75rem 0;
+      background: linear-gradient(180deg, #F7F9FC 0%, #FFFFFF 100%);
+      overflow: hidden;
     }
-    .trusted-title {
+    .logos-title {
       text-align: center;
       font-family: 'Sora', sans-serif;
-      font-size: clamp(1.12rem, 2.6vw, 1.35rem);
+      font-size: clamp(0.95rem, 2.2vw, 1.1rem);
       font-weight: 600;
-      letter-spacing: -0.01em;
-      margin-bottom: 0.8rem;
+      letter-spacing: 0.01em;
       color: var(--navy);
-      opacity: 0.9;
+      opacity: 0.65;
+      margin-bottom: 1.75rem;
+      padding: 0 1rem;
     }
-    .trusted-grid {
-      display: grid;
-      gap: 0.75rem;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-    .trusted-container {
-      overflow-x: auto;
-      scroll-snap-type: none;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: none;
-      -ms-overflow-style: none;
-    }
-    .trusted-container::-webkit-scrollbar {
-      display: none;
-    }
-    .trusted-container .trusted-grid {
-      display: flex;
-      flex-direction: row;
-      gap: 0.75rem;
-      min-width: max-content;
-    }
-    .trusted-container .trusted-item {
-      scroll-snap-align: none;
-      flex-shrink: 0;
-      width: 180px;
-      min-width: 180px;
-    }
-    @media (min-width: 640px) {
-      .trusted-container {
-        overflow-x: auto;
-      }
-      .trusted-container .trusted-item {
-        width: 180px;
-      }
-    }
-    @media (min-width: 900px) {
-      .trusted-container {
-        overflow-x: auto;
-      }
-      .trusted-container .trusted-item {
-        width: 180px;
-      }
-    }
-    .trusted-item {
-      min-height: 78px;
-      /*border: 1px solid rgba(10, 37, 64, 0.06);*/
-      border-radius: 12px;
-      /*background: #F5F7FA;*/
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0.95rem 0.8rem;
-      box-shadow: 0 1px 2px rgba(10, 37, 64, 0.03);
-      transition: transform 0.2s ease, box-shadow var(--transition), border-color var(--transition), background 0.25s ease;
-    }
-    .trusted-logo {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      max-width: 100%;
-      min-width: 0;
-    }
-    .trusted-mark {
-      width: 0px;
-      height: 0px;
-      border-radius: 999px;
-      background: linear-gradient(145deg, rgba(59, 130, 246, 0.2), rgba(10, 37, 64, 0.18));
-      color: var(--navy);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.625rem;
-      font-weight: 700;
-      letter-spacing: 0.02em;
-      flex-shrink: 0;
-    }
-    .trusted-name {
-      font-weight: 600;
-      font-size: 0.93rem;
-      color: var(--navy);
-      white-space: nowrap;
+    /* Fade masks on the sides */
+    .logos-marquee {
+      position: relative;
       overflow: hidden;
-      text-overflow: ellipsis;
+      -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 12%, #000 88%, transparent 100%);
+      mask-image: linear-gradient(90deg, transparent 0%, #000 12%, #000 88%, transparent 100%);
     }
-    .trusted-item:hover {
-      transform: translateY(-2px);
-      background: #FFFFFF;
-      border-color: rgba(59, 130, 246, 0.28);
-      box-shadow: 0 10px 22px rgba(10, 37, 64, 0.08);
+    .logos-track {
+      display: flex;
+      align-items: center;
+      width: max-content;
+      animation: logos-scroll 30s linear infinite;
+      will-change: transform;
+    }
+    .logos-track:hover {
+      animation-play-state: paused;
+    }
+    /* Spacing lives on the items (not track gap) so translateX(-50%) loops perfectly */
+    .logo-item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-right: 3.5rem;
+    }
+    .logo-item img {
+      height: 44px;
+      width: auto;
+      max-width: 160px;
+      object-fit: contain;
+    }
+    @keyframes logos-scroll {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+    @media (max-width: 640px) {
+      .logos-strip { padding: 2.25rem 0; }
+      .logo-item { margin-right: 2.25rem; }
+      .logo-item img { height: 36px; max-width: 130px; }
     }
 
     /* Stats */
@@ -1446,6 +1399,8 @@
       </div>
     </section>
 
+    
+
     <section class="section problem" id="problema" aria-labelledby="problema-titulo">
       <div class="container">
         <h2 id="problema-titulo" class="section-title reveal">A concorrência aparece. E você?</h2>
@@ -1470,7 +1425,18 @@
       </div>
     </section>
 
-
+    <section class="logos-strip" aria-label="Empresas que confiam na Identidade Web">
+      <p class="logos-title reveal">Empresas que já constroem sua presença digital com a gente</p>
+      <div class="logos-marquee">
+        <div class="logos-track" id="logos-track">
+          <div class="logo-item"><img src="assets/anadem.png" alt="Anadem" loading="lazy" decoding="async" /></div>
+          <div class="logo-item"><img src="assets/elite%20corte.png" alt="Elite Corte" loading="lazy" decoding="async" /></div>
+          <div class="logo-item"><img src="assets/Logo%20celus%20(1).png" alt="Celus" loading="lazy" decoding="async" /></div>
+          <div class="logo-item"><img src="assets/logo_seguremed.png" alt="Seguremed" loading="lazy" decoding="async" /></div>
+          <div class="logo-item"><img src="assets/odonto%20prime.png" alt="Odonto Prime" loading="lazy" decoding="async" /></div>
+        </div>
+      </div>
+    </section>
     
 
 
@@ -1820,32 +1786,11 @@
         });
       }
 
-      // Auto-scroll trusted logos on all screen sizes
-      var trustedContainer = document.querySelector('.trusted-container');
-      if (trustedContainer) {
-        var trustedGrid = trustedContainer.querySelector('.trusted-grid');
-        if (trustedGrid && !trustedGrid.dataset.carouselReady) {
-          var logoItems = Array.from(trustedGrid.children);
-          var originalWidth = trustedGrid.scrollWidth;
-          logoItems.forEach(function (item) {
-            var clone = item.cloneNode(true);
-            clone.classList.remove('reveal', 'reveal-delay-1', 'reveal-delay-2', 'reveal-delay-3');
-            clone.classList.add('carousel-clone');
-            trustedGrid.appendChild(clone);
-          });
-          trustedGrid.dataset.carouselReady = 'true';
-          trustedContainer.scrollLeft = 0;
-
-          var scrollSpeed = 1.2;
-          function animateTrusted() {
-            trustedContainer.scrollLeft += scrollSpeed;
-            if (trustedContainer.scrollLeft >= originalWidth) {
-              trustedContainer.scrollLeft = 0;
-            }
-            requestAnimationFrame(animateTrusted);
-          }
-          animateTrusted();
-        }
+      // Logo marquee: duplicate track once for a seamless infinite scroll
+      var logosTrack = document.getElementById('logos-track');
+      if (logosTrack && !logosTrack.dataset.ready) {
+        logosTrack.innerHTML += logosTrack.innerHTML;
+        logosTrack.dataset.ready = 'true';
       }
     })();
   </script>
