@@ -103,13 +103,18 @@
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
+    html {
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+      overflow-x: clip;
+    }
     body {
       font-family: 'Inter', system-ui, -apple-system, sans-serif;
       color: var(--navy);
       background: var(--white);
       line-height: 1.6;
       overflow-x: hidden;
+      overflow-x: clip;
     }
 
     img { max-width: 100%; height: auto; display: block; }
@@ -380,11 +385,16 @@
         box-shadow: -16px 0 48px rgba(10, 37, 64, 0.12);
         padding: 1rem 1.75rem 2rem;
         transform: translateX(100%);
-        transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        visibility: hidden;
+        transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), visibility 0s linear 0.35s;
         z-index: 90;
         overflow-y: auto;
       }
-      .main-nav.open { transform: translateX(0); }
+      .main-nav.open {
+        transform: translateX(0);
+        visibility: visible;
+        transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), visibility 0s;
+      }
       .nav-mobile-head {
         display: flex;
         margin-bottom: 1rem;
@@ -1276,6 +1286,18 @@
       .cta-final { padding: 3.5rem 0; }
     }
 
+    /* Embedded form (Zoho) */
+    .form-wrap {
+      width: 100%;
+      max-width: 100%;
+      overflow: hidden;
+    }
+    .form-wrap iframe {
+      display: block;
+      width: 100%;
+      max-width: 100%;
+    }
+
     /* Footer */
     .footer {
       background: var(--navy);
@@ -1457,7 +1479,7 @@
     <section class="section" id="solucao" aria-labelledby="solucao-titulo">
       <div class="container">
         <h2 id="solucao-titulo" class="section-title reveal">Tudo o que seu negócio precisa, em um só lugar.</h2>
-        <p class="section-lead reveal">Site, link na bio, SEO, domínio e hospedagem - você cuida do atendimento, nós cuidamos da presença digital.</p>
+        <p class="section-lead reveal">Você cuida do atendimento, nós cuidamos da presença digital.</p>
         <div class="solution-box reveal">
           <p><strong>Um parceiro, um fluxo, um resultado:</strong> seu negócio no mapa digital com padrão de agência premium, focado em conversão.</p>
 
@@ -1665,7 +1687,7 @@
         <a class="btn btn-primary btn-lg wa-link reveal reveal-delay-1" href="#" data-wa>Quero minha estrutura digital agora</a>
       </div>
     </section>
-    <iframe aria-label='Entre em Contato' frameborder="0" style="display:block;height:500px;width:100%;max-width:100%;border:none;" src='https://forms.zohopublic.com/contatoidenti1/form/PartnershipInquiryForm/formperma/RSjr6u_GCC7MPBTK-fJA3vc2InqcyBUrtEtasF_Nz3c'></iframe>
+    <div class="form-wrap"><iframe aria-label='Entre em Contato' frameborder="0" style="display:block;height:500px;width:100%;max-width:100%;border:none;" src='https://forms.zohopublic.com/contatoidenti1/form/PartnershipInquiryForm/formperma/RSjr6u_GCC7MPBTK-fJA3vc2InqcyBUrtEtasF_Nz3c'></iframe></div>
   </main>
 
   <footer class="footer">
