@@ -1323,6 +1323,221 @@
       z-index: 300;
       border-radius: 8px;
     }
+
+    /* Portfolio */
+    .portfolio-grid {
+      display: grid;
+      gap: 1.75rem;
+      margin-top: 2.5rem;
+    }
+    @media (min-width: 768px) {
+      .portfolio-grid { gap: 2rem; }
+    }
+    .portfolio-card {
+      display: grid;
+      background: var(--white);
+      border: 1px solid rgba(10, 37, 64, 0.08);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow var(--transition), border-color var(--transition);
+    }
+    .portfolio-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-lg);
+      border-color: rgba(59, 130, 246, 0.4);
+    }
+    @media (min-width: 900px) {
+      .portfolio-card {
+        grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+        min-height: 360px;
+      }
+      .portfolio-card--reverse {
+        grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+      }
+      .portfolio-card--reverse .portfolio-media { order: 2; }
+    }
+    .portfolio-media,
+    .portfolio-content {
+      min-width: 0;
+    }
+    .portfolio-media {
+      position: relative;
+      min-height: 240px;
+      overflow: hidden;
+      background: var(--gray-bg);
+    }
+    @media (min-width: 900px) {
+      .portfolio-media { min-height: 100%; }
+    }
+    .portfolio-frame {
+      height: 100%;
+      min-height: 240px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .portfolio-chrome {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.7rem 0.9rem;
+      background: #071828;
+      flex-shrink: 0;
+    }
+    .portfolio-chrome span {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.22);
+    }
+    .portfolio-chrome span:first-child { background: #EF4444; }
+    .portfolio-chrome span:nth-child(2) { background: #F59E0B; }
+    .portfolio-chrome span:nth-child(3) { background: #22C55E; }
+    .portfolio-placeholder {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      min-height: 200px;
+      padding: 2rem 1.25rem;
+      background:
+        radial-gradient(ellipse 80% 70% at 78% 18%, rgba(59, 130, 246, 0.22), transparent 58%),
+        linear-gradient(165deg, #0B1F38 0%, var(--navy) 58%, #0D3254 100%);
+      transition: transform 0.5s ease;
+    }
+    .portfolio-card--reverse .portfolio-placeholder {
+      background:
+        radial-gradient(ellipse 75% 65% at 22% 78%, rgba(59, 130, 246, 0.18), transparent 55%),
+        linear-gradient(195deg, #0D2B4E 0%, var(--navy) 60%, #0B1F38 100%);
+    }
+    .portfolio-card:nth-child(3) .portfolio-placeholder {
+      background:
+        radial-gradient(ellipse 70% 60% at 50% 100%, rgba(59, 130, 246, 0.2), transparent 55%),
+        linear-gradient(180deg, #0B1F38 0%, var(--navy) 100%);
+    }
+    .portfolio-card:hover .portfolio-placeholder:not(.portfolio-placeholder--photo) {
+      transform: scale(1.03);
+    }
+    .portfolio-media img {
+      width: 100%;
+      height: 100%;
+      min-height: 220px;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+    .portfolio-placeholder--photo {
+      position: relative;
+      overflow: hidden;
+    }
+    .portfolio-placeholder--photo img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      min-height: 0;
+      object-fit: cover;
+      object-position: center;
+      z-index: 0;
+    }
+    .portfolio-placeholder--photo img[hidden] { display: none; }
+    .portfolio-placeholder--photo::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(10, 37, 64, 0.52);
+      z-index: 1;
+      opacity: 0;
+    }
+    .portfolio-placeholder--photo:has(img:not([hidden]))::after {
+      opacity: 1;
+    }
+    .portfolio-placeholder--photo .portfolio-placeholder-mark,
+    .portfolio-placeholder--photo .portfolio-placeholder-label {
+      position: relative;
+      z-index: 2;
+    }
+    .portfolio-placeholder--photo:has(img:not([hidden])) .portfolio-placeholder-mark,
+    .portfolio-placeholder--photo:has(img:not([hidden])) .portfolio-placeholder-label {
+      text-shadow: 0 2px 12px rgba(10, 37, 64, 0.45);
+    }
+    .portfolio-card:hover .portfolio-placeholder--photo img:not([hidden]) {
+      transform: scale(1.04);
+    }
+    .portfolio-placeholder-mark {
+      font-family: 'Sora', sans-serif;
+      font-weight: 700;
+      font-size: 1.5rem;
+      letter-spacing: -0.03em;
+      color: var(--white);
+    }
+    .portfolio-placeholder-label {
+      font-size: 0.8125rem;
+      font-weight: 500;
+      color: rgba(226, 232, 240, 0.72);
+    }
+    .portfolio-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 1.75rem 1.5rem 1.85rem;
+    }
+    @media (min-width: 900px) {
+      .portfolio-content { padding: 2.5rem 2.25rem; }
+    }
+    @media (max-width: 480px) {
+      .portfolio-media { min-height: 200px; }
+      .portfolio-content { padding: 1.5rem 1.25rem 1.65rem; }
+    }
+    .portfolio-category {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.55rem;
+    }
+    .portfolio-content h3 {
+      font-family: 'Sora', sans-serif;
+      font-size: clamp(1.25rem, 2.4vw, 1.625rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.7rem;
+      line-height: 1.25;
+    }
+    .portfolio-content p {
+      font-size: 0.9375rem;
+      color: var(--text-muted);
+      margin-bottom: 1.35rem;
+      max-width: 38ch;
+    }
+    .portfolio-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      min-height: 44px;
+      font-weight: 600;
+      font-size: 0.9375rem;
+      color: var(--accent);
+      width: fit-content;
+      transition: color var(--transition), gap 0.2s ease;
+    }
+    .portfolio-link svg {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+      transition: transform 0.2s ease;
+    }
+    .portfolio-link:hover { color: var(--accent-hover); }
+    .portfolio-link:hover svg { transform: translateX(4px); }
+    .portfolio-link:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 4px;
+      border-radius: 6px;
+    }
   </style>
 </head>
 <body>
@@ -1342,6 +1557,7 @@
           </button>
         </div>
         <a href="#solucao">Solução</a>
+        <a href="#projetos">Projetos</a>
         <a href="#servicos">Serviços</a>
         <a href="#depoimentos">Resultados</a>
         <a href="#contato">Contato</a>
@@ -1480,6 +1696,84 @@
             <h3>Facilidade total</h3>
             <p>Domínio, hospedagem e e-mail na mesma solução.</p>
           </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section portfolio-section" id="projetos" aria-labelledby="projetos-titulo">
+      <div class="container">
+        <h2 id="projetos-titulo" class="section-title reveal">Projetos que transformam presença digital em negócio.</h2>
+        <p class="section-lead reveal">Conheça alguns dos projetos desenvolvidos pela Identidade Web para transformar ideias, marcas e negócios em experiências digitais profissionais.</p>
+        <div class="portfolio-grid">
+
+          <article class="portfolio-card reveal" id="projeto-shekinah" data-project="shekinah">
+            <div class="portfolio-media">
+              <div class="portfolio-frame">
+                <div class="portfolio-chrome" aria-hidden="true"><span></span><span></span><span></span></div>
+                <div class="portfolio-placeholder portfolio-placeholder--photo">
+                  <!-- Adicionar o arquivo: assets/carrossel shekinah.png -->
+                  <img src="assets/telas%20shekinah.png" alt="Sistema de gestão de pedidos desenvolvido para o Sítio Shekinah" width="960" height="640" loading="lazy" decoding="async" onerror="this.hidden=true" />
+                  <span class="portfolio-placeholder-mark" aria-hidden="true">Shekinah</span>
+                  <span class="portfolio-placeholder-label" aria-hidden="true">Sistema de gestão</span>
+                </div>
+              </div>
+            </div>
+            <div class="portfolio-content">
+              <p class="portfolio-category">Sistema Web · Gestão</p>
+              <h3>Sítio Shekinah</h3>
+              <p>Sistema de gestão de pedidos e operações desenvolvido para digitalizar o atendimento e organizar a operação do Sítio Shekinah.</p>
+              <a href="projetos/shekinah.html" class="portfolio-link" aria-label="Ver projeto Sítio Shekinah">
+                Ver projeto
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </a>
+            </div>
+          </article>
+
+          <article class="portfolio-card portfolio-card--reverse reveal reveal-delay-1" id="projeto-celus" data-project="celus">
+            <div class="portfolio-media">
+              <div class="portfolio-frame">
+                <div class="portfolio-chrome" aria-hidden="true"><span></span><span></span><span></span></div>
+                <div class="portfolio-placeholder portfolio-placeholder--photo">
+                  <img src="assets/carrossel%20celus.png" alt="Site institucional desenvolvido para o Escola Celus" width="960" height="640" loading="lazy" decoding="async" onerror="this.hidden=true" />
+                  <span class="portfolio-placeholder-mark" aria-hidden="true">Celus</span>
+                  <span class="portfolio-placeholder-label" aria-hidden="true">Site institucional</span>
+                </div>
+              </div>
+            </div>
+            <div class="portfolio-content">
+              <p class="portfolio-category">Site Institucional · Web Design</p>
+              <h3>Escola Celus</h3>
+              <p>Site institucional desenvolvido para fortalecer a presença digital da instituição e apresentar sua proposta, estrutura e diferenciais de forma profissional.</p>
+              <a href="projetos/celus.html" class="portfolio-link" aria-label="Ver projeto Escola Celus">
+                Ver projeto
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </a>
+            </div>
+          </article>
+
+          <article class="portfolio-card reveal reveal-delay-2" id="projeto-loja-lm" data-project="loja-lm">
+            <div class="portfolio-media">
+              <div class="portfolio-frame">
+                <div class="portfolio-chrome" aria-hidden="true"><span></span><span></span><span></span></div>
+                <div class="portfolio-placeholder portfolio-placeholder--photo">
+                  <!-- Adicionar o arquivo: assets/loja lm.png -->
+                  <img src="assets/loja%20lm.png" alt="Catálogo online de bolsas personalizadas desenvolvido para a Loja LM" width="960" height="640" loading="lazy" decoding="async" onerror="this.hidden=true" />
+                  <span class="portfolio-placeholder-mark" aria-hidden="true">Loja LM</span>
+                  <span class="portfolio-placeholder-label" aria-hidden="true">Catálogo online</span>
+                </div>
+              </div>
+            </div>
+            <div class="portfolio-content">
+              <p class="portfolio-category">Catálogo Online · Web Design</p>
+              <h3>Loja LM</h3>
+              <p>Catálogo online desenvolvido sob medida para apresentar as bolsas personalizadas da loja de forma organizada e alinhada à identidade visual da marca.</p>
+              <a href="projetos/loja-lm.html" class="portfolio-link" aria-label="Ver projeto Loja LM">
+                Ver projeto
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </a>
+            </div>
+          </article>
+
         </div>
       </div>
     </section>
