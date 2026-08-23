@@ -1483,6 +1483,184 @@
     }
     .wa-float svg { width: 30px; height: 30px; }
 
+    /* Bob widget */
+    .bob-widget {
+      position: fixed;
+      z-index: 190;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 0.55rem;
+      width: min(280px, calc(100% - 1.5rem));
+      right: 1.25rem;
+      bottom: 5.75rem;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(20px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .bob-widget.bob-is-visible {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+    .bob-bubble {
+      width: 100%;
+      padding: 0.95rem 2.1rem 1rem 1rem;
+      background: var(--white);
+      color: var(--navy);
+      border: 1px solid rgba(59, 130, 246, 0.22);
+      border-radius: 14px;
+      box-shadow: 0 12px 32px rgba(10, 37, 64, 0.16);
+      position: relative;
+    }
+    .bob-bubble::after {
+      content: '';
+      position: absolute;
+      right: 28px;
+      bottom: -7px;
+      width: 12px;
+      height: 12px;
+      background: var(--white);
+      border-right: 1px solid rgba(59, 130, 246, 0.22);
+      border-bottom: 1px solid rgba(59, 130, 246, 0.22);
+      transform: rotate(45deg);
+    }
+    .bob-hi {
+      font-family: 'Sora', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.25rem;
+    }
+    .bob-ask {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      margin-bottom: 0.7rem;
+    }
+    .bob-input {
+      width: 100%;
+      height: 40px;
+      padding: 0 0.8rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.875rem;
+      color: var(--navy);
+      background: var(--gray-bg);
+      border: 1px solid rgba(10, 37, 64, 0.12);
+      border-radius: 10px;
+      outline: none;
+    }
+    .bob-input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.18);
+    }
+    .bob-form {
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+    }
+    .bob-submit {
+      width: 100%;
+      height: 40px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--white);
+      background: var(--accent);
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+    .bob-submit:hover { background: var(--accent-hover); }
+    .bob-error {
+      display: none;
+      font-size: 0.8rem;
+      color: #1D4ED8;
+      margin-top: 0.15rem;
+    }
+    .bob-error.bob-is-shown { display: block; }
+    .bob-form.bob-is-hidden { display: none; }
+    .bob-close {
+      position: absolute;
+      top: 0.45rem;
+      right: 0.5rem;
+      width: 28px;
+      height: 28px;
+      padding: 0;
+      border: none;
+      border-radius: 50%;
+      background: transparent;
+      color: var(--navy);
+      font-size: 1.15rem;
+      line-height: 1;
+      cursor: pointer;
+    }
+    .bob-close:hover { color: var(--accent); }
+    .bob-wa {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      min-height: 42px;
+      padding: 0.65rem 0.85rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--white);
+      background: var(--accent);
+      border-radius: 10px;
+      text-align: center;
+      transition: background 0.2s ease;
+    }
+    .bob-wa:hover { background: var(--accent-hover); }
+    .bob-wa.bob-is-shown { display: flex; margin-top: 0.15rem; }
+    .bob-widget.bob-is-minimized {
+      width: auto;
+    }
+    .bob-widget.bob-is-minimized .bob-bubble { display: none; }
+    .bob-widget.bob-is-minimized .bob-avatar { width: 72px; }
+    .bob-widget.bob-keyboard-open {
+      bottom: 0.75rem;
+    }
+    .bob-avatar {
+      width: 92px;
+      height: auto;
+      display: block;
+      filter: drop-shadow(0 10px 18px rgba(10, 37, 64, 0.22));
+      transition: opacity 0.35s ease;
+    }
+    .bob-avatar.bob-is-fading { opacity: 0; }
+    @media (min-width: 900px) {
+      .bob-widget {
+        left: auto;
+        right: 6.25rem;
+        bottom: 1.5rem;
+        width: auto;
+        flex-direction: row;
+        align-items: flex-end;
+        gap: 0.65rem;
+        transform: translateY(20px);
+      }
+      .bob-widget.bob-is-visible {
+        transform: translateY(0);
+      }
+      .bob-bubble {
+        width: 220px;
+      }
+      .bob-bubble::after {
+        left: auto;
+        right: -6px;
+        bottom: 28px;
+        transform: rotate(-45deg);
+      }
+      .bob-avatar { width: 120px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .bob-widget { transition: opacity 0.4s ease; transform: none; }
+      .bob-widget.bob-is-visible { transform: none; }
+    }
+
     .skip-link {
       position: absolute;
       left: -9999px;
@@ -2177,6 +2355,26 @@
     </div>
   </footer>
 
+  <div class="bob-widget" id="bob-widget" aria-hidden="true">
+    <div class="bob-bubble">
+      <button class="bob-close" id="bob-close" type="button" aria-label="Fechar Bob">×</button>
+      <p class="bob-hi" id="bob-hi">Oi, eu sou o Bob!</p>
+      <p class="bob-ask" id="bob-ask">Qual seu nome?</p>
+      <form class="bob-form" id="bob-form" action="#">
+        <input class="bob-input" id="bob-name" type="text" name="bob-name" placeholder="Digite seu nome" autocomplete="name" maxlength="40" aria-label="Digite seu nome">
+        <p class="bob-error" id="bob-error" role="alert">Me conta seu nome primeiro.</p>
+        <button class="bob-submit" type="submit">Enviar</button>
+      </form>
+      <form class="bob-form bob-is-hidden" id="bob-phone-form" action="#">
+        <input class="bob-input" id="bob-phone" type="tel" inputmode="numeric" autocomplete="tel" placeholder="(00) 00000-0000" maxlength="16" aria-label="Número de WhatsApp">
+        <p class="bob-error" id="bob-phone-error" role="alert">Esse número parece incompleto. Confere pra mim?</p>
+        <button class="bob-submit" type="submit">Enviar número</button>
+      </form>
+      <a class="bob-wa" id="bob-wa" href="#">Falar com a Identidade Web</a>
+    </div>
+    <img class="bob-avatar" id="bob-avatar" src="assets/bob/bob-acenando.png" alt="Bob, assistente da Identidade Web" width="120" height="120">
+  </div>
+
   <a class="wa-float wa-link" href="#" data-wa aria-label="Abrir WhatsApp, Identidade Web">
     <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.881 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
   </a>
@@ -2302,6 +2500,120 @@
       if (logosTrack && !logosTrack.dataset.ready) {
         logosTrack.innerHTML += logosTrack.innerHTML;
         logosTrack.dataset.ready = 'true';
+      }
+    })();
+
+    (function () {
+      'use strict';
+      var bob = document.getElementById('bob-widget');
+      var form = document.getElementById('bob-form');
+      var nameInput = document.getElementById('bob-name');
+      var errorEl = document.getElementById('bob-error');
+      var hiEl = document.getElementById('bob-hi');
+      var askEl = document.getElementById('bob-ask');
+      var avatar = document.getElementById('bob-avatar');
+      var phoneForm = document.getElementById('bob-phone-form');
+      var phoneInput = document.getElementById('bob-phone');
+      var phoneError = document.getElementById('bob-phone-error');
+      var bobName = '';
+      var bobPhone = '';
+      var waBtn = document.getElementById('bob-wa');
+      var closeBtn = document.getElementById('bob-close');
+      if (!bob || !form || !nameInput || !phoneForm || !phoneInput) return;
+
+      var bobShown = false;
+
+      function hideBob() {
+        bob.classList.remove('bob-is-visible');
+        bob.setAttribute('aria-hidden', 'true');
+        bobShown = true;
+      }
+
+      function maskPhone(value) {
+        var digits = String(value || '').replace(/\D/g, '').slice(0, 11);
+        if (digits.length === 0) return '';
+        if (digits.length <= 2) return '(' + digits;
+        if (digits.length <= 7) return '(' + digits.slice(0, 2) + ') ' + digits.slice(2);
+        return '(' + digits.slice(0, 2) + ') ' + digits.slice(2, 7) + '-' + digits.slice(7);
+      }
+
+      function keepBobVisible() {
+        if (!window.visualViewport) return;
+        var overlap = window.innerHeight - window.visualViewport.height - window.visualViewport.offsetTop;
+        if (overlap > 80) {
+          bob.classList.add('bob-keyboard-open');
+          bob.style.bottom = (overlap + 12) + 'px';
+        } else {
+          bob.classList.remove('bob-keyboard-open');
+          bob.style.bottom = '';
+        }
+      }
+
+      window.setTimeout(function () {
+        if (bobShown) return;
+        bob.classList.add('bob-is-visible');
+        bob.setAttribute('aria-hidden', 'false');
+        window.setTimeout(function () {
+          if (nameInput && !form.classList.contains('bob-is-hidden')) nameInput.focus();
+        }, 480);
+      }, 6000);
+
+      if (window.visualViewport) {
+        window.visualViewport.addEventListener('resize', keepBobVisible);
+        window.visualViewport.addEventListener('scroll', keepBobVisible);
+      }
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var name = (nameInput.value || '').replace(/^\s+|\s+$/g, '');
+        if (!name) {
+          errorEl.classList.add('bob-is-shown');
+          nameInput.focus();
+          return;
+        }
+        errorEl.classList.remove('bob-is-shown');
+        bobName = name;
+        hiEl.textContent = 'Prazer, ' + bobName + '!';
+        askEl.textContent = 'Me passa seu número de WhatsApp para eu te mandar uma mensagem.';
+        form.classList.add('bob-is-hidden');
+        phoneForm.classList.remove('bob-is-hidden');
+        avatar.classList.add('bob-is-fading');
+        window.setTimeout(function () {
+          avatar.src = 'assets/bob/bob-beleza.png';
+          avatar.classList.remove('bob-is-fading');
+        }, 180);
+        window.setTimeout(function () { phoneInput.focus(); }, 80);
+      });
+
+      phoneInput.addEventListener('input', function () {
+        phoneInput.value = maskPhone(phoneInput.value);
+        phoneError.classList.remove('bob-is-shown');
+      });
+
+      phoneForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var digits = (phoneInput.value || '').replace(/\D/g, '');
+        if (digits.length !== 11) {
+          phoneError.classList.add('bob-is-shown');
+          phoneInput.focus();
+          return;
+        }
+        phoneError.classList.remove('bob-is-shown');
+        bobPhone = digits;
+        hiEl.textContent = 'Perfeito, ' + bobName + '!';
+        askEl.textContent = 'Obrigado! Já tenho seu contato.';
+        phoneForm.classList.add('bob-is-hidden');
+        if (waBtn) waBtn.classList.remove('bob-is-shown');
+        bob.classList.remove('bob-keyboard-open');
+        bob.style.bottom = '';
+        window.setTimeout(function () {
+          hideBob(false);
+        }, 1800);
+      });
+      if (closeBtn) {
+        closeBtn.addEventListener('click', function () {
+          hideBob(false);
+        });
       }
     })();
   </script>
