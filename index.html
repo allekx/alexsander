@@ -1217,6 +1217,185 @@
       text-decoration: none;
     }
 
+    /* Pricing solutions */
+    .pricing-grid {
+      display: grid;
+      gap: 1.25rem;
+      margin-top: 2.5rem;
+      align-items: start;
+    }
+    @media (min-width: 700px) {
+      .pricing-grid { grid-template-columns: 1fr 1fr; }
+      .pricing-annual .pricing-features { display: none; }
+    }
+    .pricing-card {
+      display: flex;
+      flex-direction: column;
+      padding: 1.75rem 1.5rem 1.6rem;
+      background: var(--white);
+      border: 1px solid rgba(10, 37, 64, 0.08);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .pricing-card--featured {
+      background: linear-gradient(145deg, var(--navy) 0%, #0d3254 100%);
+      color: var(--white);
+      border: 2px solid var(--accent);
+      box-shadow: var(--shadow-lg);
+      position: relative;
+      overflow: hidden;
+    }
+    .pricing-card--featured::before {
+      content: '';
+      position: absolute;
+      top: -40%;
+      right: -25%;
+      width: 55%;
+      height: 90%;
+      background: radial-gradient(circle, rgba(59, 130, 246, 0.28) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .pricing-badge {
+      display: inline-block;
+      align-self: flex-start;
+      padding: 0.35rem 0.85rem;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      background: var(--accent);
+      color: var(--white);
+      border-radius: 999px;
+      margin-bottom: 0.9rem;
+    }
+    .pricing-card h3 {
+      font-family: 'Sora', sans-serif;
+      font-size: 1.2rem;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+    }
+    .pricing-desc {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+    .pricing-card--featured .pricing-desc { color: rgba(226, 232, 240, 0.82); }
+    .pricing-extra {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+    .pricing-price {
+      font-family: 'Sora', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.35rem;
+      color: var(--navy);
+    }
+    .pricing-card--featured .pricing-price {
+      color: var(--white);
+      font-size: clamp(2.35rem, 5vw, 3.15rem);
+      line-height: 1;
+      margin-bottom: 0.45rem;
+    }
+    .pricing-price small {
+      font-size: 0.55em;
+      font-weight: 600;
+    }
+    .pricing-start {
+      font-size: 0.9rem;
+      opacity: 0.9;
+      margin-bottom: 0.45rem;
+    }
+    .pricing-period {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 1.1rem;
+    }
+    .pricing-card--featured .pricing-period { color: rgba(226, 232, 240, 0.85); }
+    .pricing-features {
+      list-style: none;
+      margin-bottom: 1rem;
+      flex: 1;
+    }
+    .pricing-features li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.55rem;
+      padding: 0.38rem 0;
+      font-size: 0.875rem;
+      color: var(--text-muted);
+    }
+    .pricing-card--featured .pricing-features li { color: rgba(255,255,255,0.9); }
+    .pricing-features svg {
+      flex-shrink: 0;
+      margin-top: 0.15rem;
+      color: var(--accent);
+    }
+    .pricing-card--featured .pricing-features svg { color: #4ADE80; }
+    .pricing-note {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-bottom: 1.15rem;
+    }
+    .pricing-card--featured .pricing-note {
+      color: rgba(226, 232, 240, 0.8);
+    }
+    .pricing-cta {
+      width: 100%;
+      margin-top: auto;
+      position: relative;
+      z-index: 1;
+    }
+    .pricing-annual {
+      margin-top: 1.35rem;
+      padding: 1.2rem 1.1rem 1.15rem;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: var(--radius-sm);
+      position: relative;
+      z-index: 1;
+    }
+    .pricing-annual h4 {
+      font-family: 'Sora', sans-serif;
+      font-size: 0.95rem;
+      margin-bottom: 0.45rem;
+    }
+    .pricing-annual-price {
+      font-family: 'Sora', sans-serif;
+      font-size: 1.65rem;
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 0.35rem;
+    }
+    .pricing-annual-price small { font-size: 0.95rem; }
+    .pricing-save {
+      display: inline-block;
+      margin: 0.35rem 0 0.85rem;
+      padding: 0.25rem 0.7rem;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      background: var(--accent);
+      border-radius: 999px;
+    }
+    .pricing-annual .pricing-features { flex: none; margin-bottom: 0.9rem; }
+    .pricing-card--featured .btn-outline {
+      color: var(--white);
+      border-color: rgba(255, 255, 255, 0.45);
+    }
+    .pricing-card--featured .btn-outline:hover {
+      background: var(--white);
+      color: var(--navy);
+    }
+    @media (max-width: 480px) {
+      .pricing-card { padding: 1.5rem 1.2rem 1.4rem; }
+      .pricing-card--featured .pricing-price { font-size: clamp(2.15rem, 12vw, 2.75rem); }
+      .pricing-cta { width: 100%; }
+    }
+
     /* CTA final */
     .cta-final {
       text-align: center;
@@ -1757,7 +1936,7 @@
                 <div class="portfolio-chrome" aria-hidden="true"><span></span><span></span><span></span></div>
                 <div class="portfolio-placeholder portfolio-placeholder--photo">
                   <!-- Adicionar o arquivo: assets/loja lm.png -->
-                  <img src="assets/loja%20lm.png" alt="Catálogo online de bolsas personalizadas desenvolvido para a Loja LM" width="960" height="640" loading="lazy" decoding="async" onerror="this.hidden=true" />
+                  <img src="assets/telas loja lm.png" alt="Catálogo online de bolsas personalizadas desenvolvido para a Loja LM" width="960" height="640" loading="lazy" decoding="async" onerror="this.hidden=true" />
                   <span class="portfolio-placeholder-mark" aria-hidden="true">Loja LM</span>
                   <span class="portfolio-placeholder-label" aria-hidden="true">Catálogo online</span>
                 </div>
@@ -1897,45 +2076,83 @@
 
     <section class="section" id="oferta" aria-labelledby="oferta-titulo">
       <div class="container">
-        <h2 id="oferta-titulo" class="section-title reveal">Invista na sua presença digital com inteligência</h2>
-        <p class="section-lead reveal">Entrada acessível para você testar a estrutura completa, com padrão premium desde o primeiro dia.</p>
-        <div class="offer-wrap">
-          <div class="offer-cards">
-            <div class="offer-card reveal">
-              <span class="offer-pill">Oferta especial</span>
-              <p style="font-size:1rem;opacity:.9;margin-bottom:.75rem;">Comece por apenas</p>
-              <div class="offer-price"><small>R$</small> 3,90</div>
-              <p class="offer-after">no primeiro mês · depois <strong>R$ 89/mês</strong> pela estrutura completa</p>
-              <ul class="offer-list">
-                <li><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg> Site + bio + SEO + domínio + hospedagem + e-mail</li>
-                <li><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg> Suporte e evolução contínua da sua presença</li>
-                <li><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg> Foco em conversão e negócios locais</li>
+        <h2 id="oferta-titulo" class="section-title reveal">Soluções para cada etapa do seu negócio</h2>
+        <p class="section-lead reveal">Escolha a estrutura ideal para o seu momento. Do essencial a projetos digitais completos e personalizados.</p>
+        <div class="pricing-grid">
+
+          <article class="pricing-card reveal">
+            <h3>Landing Page</h3>
+            <p class="pricing-desc">Para campanhas, serviços específicos e negócios que precisam de uma página objetiva para apresentar e converter.</p>
+            <p class="pricing-price">R$ 400 a R$ 600</p>
+            <ul class="pricing-features">
+              <li><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg> Página única profissional</li>
+              <li><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg> Design responsivo</li>
+              <li><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg> Estrutura focada em conversão</li>
+              <li><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg> Botões de contato e WhatsApp</li>
+              <li><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg> SEO básico</li>
+            </ul>
+            <p class="pricing-note">Domínio e hospedagem não inclusos.</p>
+            <a class="btn btn-outline pricing-cta wa-link" href="#" data-wa data-wa-message="Olá! Tenho interesse em uma Landing Page.">Quero uma Landing Page</a>
+          </article>
+
+          <article class="pricing-card reveal reveal-delay-1">
+            <h3>Site Institucional</h3>
+            <p class="pricing-desc">Para empresas que precisam de uma presença digital profissional para apresentar sua marca, serviços e diferenciais.</p>
+            <p class="pricing-price">R$ 900 a R$ 1.400</p>
+            <ul class="pricing-features">
+              <li><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg> Site institucional sob medida</li>
+              <li><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg> Design responsivo</li>
+              <li><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg> Estrutura personalizada</li>
+              <li><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg> SEO básico</li>
+              <li><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg> Integração com WhatsApp</li>
+            </ul>
+            <p class="pricing-note">Domínio e hospedagem não inclusos.</p>
+            <a class="btn btn-outline pricing-cta wa-link" href="#" data-wa data-wa-message="Olá! Tenho interesse em criar um site institucional.">Quero meu site</a>
+          </article>
+
+          <article class="pricing-card pricing-card--featured reveal reveal-delay-2">
+            <span class="pricing-badge">Mais completa</span>
+            <h3>Estrutura Completa</h3>
+            <p class="pricing-start">Comece por apenas</p>
+            <p class="pricing-price"><small>R$</small> 3,90</p>
+            <p class="pricing-period">no primeiro mês · depois R$ 89/mês</p>
+            <ul class="pricing-features">
+              <li><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg> Site + bio + SEO + domínio + hospedagem + e-mail</li>
+              <li><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg> Suporte e evolução contínua da sua presença</li>
+              <li><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg> Foco em conversão e negócios locais</li>
+            </ul>
+            <p class="pricing-note">Domínio e hospedagem inclusos.</p>
+            <a class="btn btn-primary pricing-cta wa-link" href="#" data-wa data-wa-message="Olá! Tenho interesse na estrutura completa da Identidade Web.">Quero a estrutura completa</a>
+            <div class="pricing-annual">
+              <h4>Pague por ano e economize</h4>
+              <p class="pricing-annual-price"><small>R$</small> 890,00</p>
+              <p class="pricing-period">por ano · <s>R$ 1.068,00</s></p>
+              <span class="pricing-save">Economia de R$ 178,00</span>
+              <ul class="pricing-features">
+                <li><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg> Site + bio + SEO + domínio + hospedagem + e-mail</li>
+                <li><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg> Suporte e evolução contínua da sua presença</li>
+                <li><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg> Foco em conversão e negócios locais</li>
               </ul>
-              <a class="btn btn-primary btn-lg wa-link" href="#" data-wa style="position:relative;z-index:1;">Garantir minha vaga, R$ 3,90</a>
+              <a class="btn btn-outline pricing-cta wa-link" href="#" data-wa data-wa-message="Olá! Tenho interesse na estrutura completa da Identidade Web.">Quero o plano anual</a>
             </div>
-            <div class="offer-card reveal reveal-delay-1">
-              <span class="offer-pill">Pacote anual</span>
-              <p style="font-size:1rem;opacity:.9;margin-bottom:.75rem;">Pague por ano e economize</p>
-              <div class="offer-price"><small>R$</small> 890,00</div>
-              <p class="offer-after">por ano · <s>R$ 1.068,00</s> · economia de R$ 178,00</p>
-              <ul class="offer-list">
-                <li><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg> Site + bio + SEO + domínio + hospedagem + e-mail</li>
-                <li><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg> Suporte e evolução contínua da sua presença</li>
-                <li><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg> Foco em conversão e negócios locais</li>
-              </ul>
-              <a class="btn btn-outline btn-lg wa-link" href="#" data-wa style="position:relative;z-index:1;">Escolher pacote anual, R$ 890,00</a>
-            </div>
-          </div>
-          <div class="value-stack reveal reveal-delay-2">
-            <h3>Valor percebido do pacote</h3>
-            <div class="value-row"><span>Site profissional + bio</span><span>R$ 2.500+</span></div>
-            <div class="value-row"><span>SEO e configurações técnicas</span><span>R$ 800+</span></div>
-            <div class="value-row"><span>Domínio, hospedagem e e-mail (ano)</span><span>R$ 400+</span></div>
-            <div class="value-total"><span>Pacote mensal</span><span>R$ 3,90</span></div>
-            <p style="font-size:0.8125rem;color:var(--text-muted);margin-top:1rem;">Comece por apenas R$ 3,90 no primeiro mês · depois R$ 89/mês.</p>
-            <div class="value-total"><span>Pacote anual</span><span>R$ 890,00</span></div>
-            <p style="font-size:0.8125rem;color:var(--text-muted);margin-top:1rem;">Valores ilustrativos de mercado.</p>
-          </div>
+          </article>
+
+          <article class="pricing-card reveal reveal-delay-3">
+            <h3>Projetos Sob Medida</h3>
+            <p class="pricing-desc">Para projetos que precisam ir além de um site e de uma estrutura digital convencional.</p>
+            <p class="pricing-extra">Sistemas, lojas, plataformas e soluções desenvolvidas de acordo com as necessidades específicas de cada negócio.</p>
+            <p class="pricing-price">A combinar</p>
+            <ul class="pricing-features">
+              <li><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg> Desenvolvimento sob medida</li>
+              <li><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg> Funcionalidades personalizadas</li>
+              <li><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg> Sistemas de gestão</li>
+              <li><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg> Lojas e plataformas</li>
+              <li><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg> Integrações</li>
+              <li><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg> Orçamento personalizado</li>
+            </ul>
+            <a class="btn btn-outline pricing-cta wa-link" href="#" data-wa data-wa-message="Olá! Tenho um projeto sob medida e gostaria de conversar.">Falar sobre meu projeto</a>
+          </article>
+
         </div>
       </div>
     </section>
@@ -1972,13 +2189,13 @@
       var WHATSAPP_NUMBER = '5592992534622';
       var WHATSAPP_MESSAGE = 'Olá, quero criar minha estrutura digital com a Identidade Web';
 
-      function buildWhatsAppUrl() {
-        var text = encodeURIComponent(WHATSAPP_MESSAGE);
+      function buildWhatsAppUrl(message) {
+        var text = encodeURIComponent(message || WHATSAPP_MESSAGE);
         return 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + text;
       }
 
       document.querySelectorAll('.wa-link').forEach(function (el) {
-        el.setAttribute('href', buildWhatsAppUrl());
+        el.setAttribute('href', buildWhatsAppUrl(el.getAttribute('data-wa-message')));
       });
 
       // Mobile menu
