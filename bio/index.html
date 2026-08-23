@@ -4,926 +4,464 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name="robots" content="index, follow" />
-  <meta property="og:image" content="https://identidadeweb.com/assets/logo%20identidade%20web.png" />
-  <link rel="icon" type="image/png" href="../assets/logo identidade web.png" sizes="96x96" />
-  <link rel="apple-touch-icon" href="assets/logo%20identidade%20web.png" sizes="180x180" />
   <link rel="canonical" href="https://identidadeweb.com/bio/" />
-  <meta name="description" content="Identidade Web, Criação de sites profissionais, presença digital e estrutura para empresas. Resultados comprovados em conversão e SEO. Fale conosco pelo WhatsApp." />
-  <meta name="theme-color" content="#0F172A" />
-  <meta property="og:title" content="Identidade Web | Presença Digital Profissional" />
-  <meta property="og:description" content="Transforme seu negócio com sites modernos e estratégia digital. Fale com nossos especialistas pelo WhatsApp." />
+  <meta name="description" content="Sites profissionais, landing pages e soluções digitais sob medida para empresas. Identidade Web." />
+  <meta name="theme-color" content="#0A2540" />
+  <meta property="og:title" content="Identidade Web | Presença Digital" />
+  <meta property="og:description" content="Sites profissionais, landing pages e soluções digitais sob medida para empresas." />
   <meta property="og:url" content="https://identidadeweb.com/bio/" />
   <meta property="og:type" content="website" />
-  <title>Identidade Web | Presença Digital Profissional</title>
+  <meta property="og:image" content="https://identidadeweb.com/assets/logo%20identidade%20web.png" />
+  <title>Identidade Web | Presença Digital</title>
+  <link rel="icon" type="image/png" href="../assets/logo%20identidade%20web.png" sizes="96x96" />
+  <link rel="apple-touch-icon" href="../assets/logo%20identidade%20web.png" sizes="180x180" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg-dark: #0F172A;
-      --bg-darker: #0B1117;
-      --bg-light: #F8FAFC;
-      --primary: #06B6D4;
-      --primary-dark: #0891B2;
-      --accent: #10B981;
-      --accent-dark: #059669;
+      --navy: #0A2540;
+      --accent: #3B82F6;
+      --accent-hover: #2563EB;
       --white: #FFFFFF;
-      --text-primary: #0F172A;
-      --text-secondary: #475569;
-      --text-tertiary: #94A3B8;
-      --border: rgba(15, 23, 42, 0.08);
-      --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.05);
-      --shadow-md: 0 4px 12px rgba(15, 23, 42, 0.08);
-      --shadow-lg: 0 12px 32px rgba(15, 23, 42, 0.12);
-      --shadow-xl: 0 20px 48px rgba(15, 23, 42, 0.15);
-      --gradient-primary: linear-gradient(135deg, #06B6D4 0%, #10B981 100%);
-      --gradient-primary-hover: linear-gradient(135deg, #0891B2 0%, #059669 100%);
-      --radius-sm: 8px;
-      --radius-md: 12px;
-      --radius-lg: 16px;
-      --radius-xl: 20px;
-      --ease-smooth: cubic-bezier(0.34, 1.56, 0.64, 1);
-      --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
-      --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+      --muted: rgba(255, 255, 255, 0.66);
+      --line: rgba(255, 255, 255, 0.12);
+    --radius: 14px;
+      --ease: 0.25s ease;
     }
 
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+    @keyframes fade-up {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    html {
-      scroll-behavior: smooth;
-      -webkit-tap-highlight-color: transparent;
+    @keyframes glow {
+      0%, 100% { filter: drop-shadow(0 8px 18px rgba(59, 130, 246, 0.28)); }
+      50% { filter: drop-shadow(0 10px 28px rgba(59, 130, 246, 0.5)); }
+    }
+
+    @keyframes pulse-soft {
+      0%, 100% { box-shadow: 0 8px 22px rgba(59, 130, 246, 0.28); }
+      50% { box-shadow: 0 10px 28px rgba(59, 130, 246, 0.42); }
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      height: 100%;
+      overflow: hidden;
     }
 
     body {
-      font-family: 'Inter', system-ui, -apple-system, sans-serif;
-      background: linear-gradient(180deg, var(--bg-light) 0%, #F1F5F9 100%);
-      color: var(--text-primary);
-      min-height: 100dvh;
-      overflow-x: hidden;
+      font-family: 'Inter', system-ui, sans-serif;
+      background-color: var(--navy);
+      background-image:
+        radial-gradient(ellipse 80% 50% at 50% -10%, rgba(59, 130, 246, 0.32), transparent 55%),
+        radial-gradient(circle at 88% 78%, rgba(59, 130, 246, 0.12), transparent 28%),
+        linear-gradient(rgba(59, 130, 246, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(59, 130, 246, 0.05) 1px, transparent 1px);
+      background-size: auto, auto, 28px 28px, 28px 28px;
+      color: var(--white);
       -webkit-font-smoothing: antialiased;
-      display: flex;
-      justify-content: center;
-      -moz-osx-font-smoothing: grayscale;
     }
 
-    /* Decorative elements */
     body::before {
       content: '';
       position: fixed;
-      top: -40%;
-      right: -10%;
-      width: 600px;
-      height: 600px;
-      background: radial-gradient(circle, rgba(6, 182, 212, 0.15) 0%, transparent 70%);
-      border-radius: 50%;
+      width: 7px;
+      height: 7px;
+      background: var(--accent);
+      opacity: 0.45;
+      top: 18%;
+      left: 14%;
+      box-shadow:
+        72vw 8vh 0 0 rgba(147, 197, 253, 0.35),
+        18vw 72vh 0 1px rgba(59, 130, 246, 0.35),
+        80vw 62vh 0 0 rgba(59, 130, 246, 0.25);
+      pointer-events: none;
       z-index: 0;
-      animation: float 6s ease-in-out infinite;
     }
 
-    body::after {
-      content: '';
-      position: fixed;
-      bottom: -20%;
-      left: -5%;
-      width: 500px;
-      height: 500px;
-      background: radial-gradient(circle, rgba(16, 185, 129, 0.1) 0%, transparent 70%);
-      border-radius: 50%;
-      z-index: 0;
-      animation: float 8s ease-in-out infinite reverse;
-    }
+    a { color: inherit; text-decoration: none; }
 
-    @keyframes float {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(30px); }
-    }
-
-    .container {
+    .wrap {
       position: relative;
       z-index: 1;
-      width: 100%;
-      max-width: 540px;
+      width: min(400px, calc(100% - 2rem));
+      height: 100dvh;
+      height: 100svh;
       margin: 0 auto;
-      padding: 2.5rem 1.25rem;
+      padding: max(1.75rem, env(safe-area-inset-top)) 0 max(1.25rem, env(safe-area-inset-bottom));
       display: flex;
       flex-direction: column;
-      gap: 1.75rem;
-    }
-
-    /* ===== HERO ===== */
-    .hero {
-      text-align: center;
-      padding: 0.75rem 0;
-    }
-
-    .hero-logo {
-      width: 85px;
-      height: 85px;
-      margin: 0 auto 1.25rem;
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .logo-circle {
-      display: none;
-    }
-
-    .logo-image {
-      position: relative;
-      z-index: 2;
-      width: 85px;
-      height: 85px;
-      background: transparent;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      animation: slideDown 0.8s var(--ease-out) forwards;
-      opacity: 0;
-    }
-
-    @keyframes slideDown {
-      from {
-        opacity: 0;
-        transform: translateY(-20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .logo-image svg {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-    }
-
-    .hero-title {
-      font-family: 'Poppins', sans-serif;
-      font-size: clamp(1.75rem, 5.5vw, 2.25rem);
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      color: var(--text-primary);
-      line-height: 1.2;
-      margin-bottom: 0.35rem;
-      animation: slideUp 0.8s var(--ease-out) 0.1s forwards;
-      opacity: 0;
-    }
-
-    .hero-title .highlight {
-      color: var(--primary);
-    }
-
-    .hero-subtitle {
-      font-size: clamp(0.875rem, 3.5vw, 0.9375rem);
-      font-weight: 500;
-      color: var(--text-secondary);
-      line-height: 1.4;
-      margin-bottom: 0rem;
-      animation: slideUp 0.8s var(--ease-out) 0.2s forwards;
-      opacity: 0;
-    }
-
-    @keyframes slideUp {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    /* ===== BENEFITS ===== */
-    .benefits {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 0.875rem;
-      animation: slideUp 0.8s var(--ease-out) 0.3s forwards;
-      opacity: 0;
-    }
-
-    .benefit-card {
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      padding: 1rem 0.8rem;
-      text-align: center;
-      transition: all 0.3s var(--ease-in-out);
-      cursor: default;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.3rem;
-    }
-
-    .benefit-card:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-md);
-      border-color: rgba(6, 182, 212, 0.3);
-    }
-
-    .benefit-icon {
-      width: 40px;
-      height: 40px;
-      background: linear-gradient(135deg, rgba(6, 182, 212, 0.08), rgba(16, 185, 129, 0.08));
-      border-radius: var(--radius-md);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--primary);
-    }
-
-    .benefit-icon svg {
-      width: 16px;
-      height: 16px;
-      stroke-width: 1;
-    }
-
-    .benefit-label {
-      font-size: 0.6rem;
-      font-weight: 600;
-      color: var(--text-primary);
-      line-height: 1.3;
-    }
-
-    /* ===== CTA PRINCIPAL ===== */
-    .cta-primary-section {
-      background: var(--gradient-primary);
-      border-radius: var(--radius-xl);
-      padding: 1.5rem 1.25rem;
-      display: flex;
-      align-items: center;
       justify-content: space-between;
-      gap: 1.125rem;
-      box-shadow: 0 10px 32px rgba(6, 182, 212, 0.18);
-      position: relative;
-      overflow: hidden;
-      animation: slideUp 0.8s var(--ease-out) 0.4s forwards;
-      opacity: 0;
-      cursor: pointer;
-      transition: all 0.3s var(--ease-in-out);
     }
 
-    .cta-primary-section:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 14px 40px rgba(6, 182, 212, 0.22);
-    }
-
-    .cta-primary-section::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at top right, rgba(255, 255, 255, 0.15), transparent);
-      pointer-events: none;
-    }
-
-    .cta-primary-title {
-      font-family: 'Poppins', sans-serif;
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: var(--white);
-      margin-bottom: 0.125rem;
-      line-height: 1.2;
-    }
-
-    .cta-primary-subtitle {
-      font-size: 0.8125rem;
-      color: rgba(255, 255, 255, 0.9);
-      margin: 0;
-    }
-
-    .cta-icon-wrapper svg {
-      width: 40px;
-      height: 40px;
-      color: var(--white);
-      filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.15));
-    }
-
-    .btn-primary {
-      display: none;
-    }
-
-    /* ===== ACTION CARDS ===== */
-    .actions {
-      display: flex;
-      flex-direction: column;
-      gap: 0.875rem;
-      animation: slideUp 0.8s var(--ease-out) 0.5s forwards;
-      opacity: 0;
-    }
-
-    .action-card {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      padding: 1.25rem 1.5rem;
-      text-decoration: none;
-      color: var(--text-primary);
-      transition: all 0.3s var(--ease-in-out);
-      cursor: pointer;
-      overflow: hidden;
-      position: relative;
-    }
-
-    .action-card::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(90deg, transparent, rgba(6, 182, 212, 0.08), transparent);
-      transform: translateX(-100%);
-      transition: transform 0.6s var(--ease-in-out);
-    }
-
-    .action-card:hover::before {
-      transform: translateX(100%);
-    }
-
-    .action-card:hover {
-      border-color: rgba(6, 182, 212, 0.4);
-      box-shadow: var(--shadow-lg);
-      background: linear-gradient(135deg, rgba(6, 182, 212, 0.02), rgba(16, 185, 129, 0.02));
-    }
-
-    .action-content {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      flex: 1;
-      min-width: 0;
-    }
-
-    .action-icon {
-      width: 44px;
-      height: 44px;
-      min-flex: 0;
-      background: linear-gradient(135deg, rgba(6, 182, 212, 0.1), rgba(16, 185, 129, 0.1));
-      border-radius: var(--radius-lg);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--primary);
-      transition: all 0.3s var(--ease-in-out);
-    }
-
-    .action-icon svg {
-      width: 24px;
-      height: 24px;
-      stroke-width: 1.5;
-    }
-
-    .action-card:hover .action-icon {
-      background: linear-gradient(135deg, rgba(6, 182, 212, 0.2), rgba(16, 185, 129, 0.2));
-      transform: scale(1.05);
-    }
-
-    .action-info {
-      flex: 1;
-      min-width: 0;
-    }
-
-    .action-label {
-      display: block;
-      font-weight: 700;
-      color: var(--text-primary);
-      font-size: 1rem;
-      line-height: 1.3;
-      margin-bottom: 0.25rem;
-    }
-
-    .action-description {
-      display: block;
-      font-size: 0.8125rem;
-      color: var(--text-secondary);
-      line-height: 1.3;
-    }
-
-    .action-arrow {
-      width: 24px;
-      height: 24px;
-      color: var(--primary);
-      opacity: 0.5;
-      transition: all 0.3s var(--ease-in-out);
+    .brand {
+      text-align: center;
       flex-shrink: 0;
+      padding-top: 0.35rem;
     }
 
-    .action-card:hover .action-arrow {
-      opacity: 1;
-      transform: translateX(6px);
+    .brand-logo {
+      width: 92px;
+      height: 92px;
+      margin: 0 auto 0.85rem;
+      display: grid;
+      place-items: center;
     }
 
-    /* ===== PROOF SECTION ===== */
-    .proof-section {
-      background: linear-gradient(135deg, rgba(6, 182, 212, 0.05) 0%, rgba(16, 185, 129, 0.05) 100%);
-      border: 1px solid rgba(6, 182, 212, 0.1);
-      border-radius: var(--radius-lg);
-      padding: 1.5rem 1.25rem;
-      text-align: center;
-      animation: slideUp 0.8s var(--ease-out) 0.6s forwards;
-      opacity: 0;
+    .brand-logo img {
+      width: 88px;
+      height: 88px;
+      object-fit: contain;
+      display: block;
+      animation: fade-up 0.6s ease both, glow 4.5s ease-in-out 0.6s infinite;
+    }
+
+    .brand h1 { animation: fade-up 0.6s ease 0.08s both; }
+    .brand p { animation: fade-up 0.6s ease 0.16s both; }
+
+    .brand h1 {
+      font-family: 'Sora', sans-serif;
+      font-size: 1.32rem;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.4rem;
+    }
+
+    .brand h1 span { color: var(--accent); }
+
+    .brand p {
+      display: inline-block;
+      position: relative;
+      font-size: 0.84rem;
+      line-height: 1.45;
+      color: var(--muted);
+      padding-bottom: 0.95rem;
+    }
+
+    .brand p::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      width: 28px;
+      height: 2px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 10px rgba(59, 130, 246, 0.45);
+      transform: translateX(-50%);
+      animation:
+        line-out 1.3s ease-in-out 0.5s forwards,
+        line-scan 5.8s ease-in-out 1.8s infinite;
+    }
+
+    @keyframes line-out {
+      from { left: 50%; transform: translateX(-50%); }
+      to { left: 66%; transform: translateX(-50%); }
+    }
+
+    @keyframes line-scan {
+      0%, 100% { left: 66%; transform: translateX(-50%); }
+      50% { left: 34%; transform: translateX(-50%); }
+    }
+
+    .links {
       display: flex;
       flex-direction: column;
-      justify-content: center;
-      width: 70%;
-      margin-left: 25%;
+      gap: 0.7rem;
+      padding: 0.35rem 0 0.5rem;
     }
 
-    .proof-icon {
+    .card {
+      display: grid;
+      grid-template-columns: 40px minmax(0, 1fr) 16px;
+      align-items: center;
+      column-gap: 0.85rem;
+      min-height: 64px;
+      padding: 0.8rem 0.95rem;
+      background: rgba(10, 37, 64, 0.35);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      animation: fade-up 0.55s ease both;
+      transition: transform var(--ease), border-color var(--ease), background var(--ease), box-shadow var(--ease);
+    }
+
+    .links .card:nth-child(1) { animation-delay: 0.22s; }
+    .links .card:nth-child(2) { animation-delay: 0.3s; }
+    .links .card:nth-child(3) { animation-delay: 0.38s; }
+    .links .card:nth-child(4) { animation-delay: 0.46s; }
+
+    .card:hover,
+    .card:focus-visible {
+      transform: translateY(-3px);
+      border-color: rgba(59, 130, 246, 0.55);
+      background: rgba(59, 130, 246, 0.12);
+    }
+
+    .card:hover .card-icon,
+    .card:focus-visible .card-icon {
+      transform: scale(1.06);
+    }
+
+    .card:hover .card-arrow,
+    .card:focus-visible .card-arrow {
+      transform: translateX(4px);
+    }
+
+    .card-primary {
+      background: var(--accent);
+      border-color: transparent;
+      animation: fade-up 0.55s ease 0.22s both, pulse-soft 3.8s ease-in-out 1s infinite;
+    }
+
+    .card-primary:hover,
+    .card-primary:focus-visible {
+      background: var(--accent-hover);
+      border-color: transparent;
+      box-shadow: 0 12px 28px rgba(37, 99, 235, 0.38);
+    }
+
+    .card-icon {
       width: 40px;
       height: 40px;
-      margin: 0 auto 0.75rem;
-      background: var(--gradient-primary);
-      border-radius: var(--radius-lg);
       display: flex;
       align-items: center;
       justify-content: center;
-      color: white;
-      font-size: 1rem;
-    }
-
-    .proof-title {
-      font-family: 'Poppins', sans-serif;
-      font-size: 1rem;
-      font-weight: 100;
-      color: var(--text-primary);
-      margin-bottom: 0.375rem;
-    }
-
-    .proof-title .highlight {
+      border-radius: 10px;
+      background: rgba(59, 130, 246, 0.18);
       color: var(--accent);
+      transition: transform var(--ease);
     }
 
-    .proof-text {
-      font-size: 0.875rem;
-      color: var(--text-secondary);
-      line-height: 1.4;
+    .card-primary .card-icon {
+      background: rgba(255, 255, 255, 0.16);
+      color: var(--white);
     }
 
-    /* ===== FOOTER ===== */
-    .footer {
-      text-align: center;
-      padding: 1.5rem 0 0.75rem;
-      border-top: 1px solid var(--border);
-      animation: slideUp 0.8s var(--ease-out) 0.7s forwards;
-      opacity: 0;
+    .card-icon svg { width: 18px; height: 18px; display: block; }
+
+    .card-text { min-width: 0; }
+
+    .card-text strong {
+      display: block;
+      font-family: 'Sora', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      line-height: 1.2;
     }
 
-    .footer-domain {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.35rem;
-      font-weight: 700;
-      color: var(--primary);
-      font-size: 0.9375rem;
-      margin-bottom: 0.5rem;
+    .card-sub {
+      display: block;
+      margin-top: 0.14rem;
+      font-size: 0.74rem;
+      line-height: 1.3;
+      color: var(--muted);
     }
 
-    .footer-domain svg {
+    .card-primary .card-sub { color: rgba(255, 255, 255, 0.86); }
+
+    .card-arrow {
       width: 16px;
       height: 16px;
+      color: var(--accent);
+      justify-self: end;
+      transition: transform var(--ease);
     }
 
-    .footer-copyright {
-      font-size: 0.75rem;
-      color: var(--text-tertiary);
+    .card-primary .card-arrow { color: var(--white); }
+
+    .bottom {
+      flex-shrink: 0;
+      padding-top: 0.35rem;
+      text-align: center;
+      animation: fade-up 0.55s ease 0.54s both;
     }
 
-    /* ===== RESPONSIVE ===== */
-    @media (max-width: 768px) {
-      .benefits {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 1rem;
-      }
-
-      .cta-primary-section {
-        flex-direction: line;
-        text-align: center;
-        padding: 1rem 1.1rem;
-      }
-
-      .cta-primary-content {
-        text-align: center;
-      }
+    .speak {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      margin-bottom: 0.85rem;
     }
 
-    @media (max-width: 640px) {
-      .container {
-        padding: 1.75rem 0.75rem;
-        gap: 1.375rem;
-      }
-
-      .hero-logo {
-        width: 75px;
-        height: 75px;
-        margin: 0 auto 1rem;
-      }
-
-      .logo-image {
-        width: 75px;
-        height: 75px;
-      }
-
-      .hero-title {
-        font-size: clamp(1.5rem, 5vw, 2rem);
-        margin-bottom: 0.25rem;
-      }
-
-      .hero-subtitle {
-        font-size: clamp(0.8125rem, 3vw, 0.875rem);
-      }
-
-      .benefits {
-       grid-template-columns: repeat(3, 1fr);
-        gap: 0.4rem;
-      }
-
-      .benefit-card {
-        padding: 1rem 0.7rem;
-        gap: 0.2rem;
-      }
-
-      .benefit-icon {
-        width: 28px;
-        height: 28px;
-      }
-
-      .benefit-icon svg {
-        width: 16px;
-        height: 16px;
-      }
-
-      .benefit-label {
-        font-size: 0.5rem;
-      }
-
-      .cta-primary-section {
-        padding: 1.1rem 1rem;
-        gap: 0.7rem;
-      }
-
-      .cta-primary-content {
-        text-align: left;
-      }
-
-      .cta-primary-title {
-        font-size: 0.85rem;
-      }
-
-      .cta-primary-subtitle {
-        font-size: 0.7rem;
-      }
-
-      .cta-icon-wrapper svg {
-        width: 36px;
-        height: 36px;
-      }
-
-      .action-card {
-        padding: 0.8rem 1rem;
-      }
-
-      .action-content {
-        gap: 0.7rem;
-      }
-
-      .action-icon {
-        width: 30px;
-        height: 30px;
-      }
-
-      .action-icon svg {
-        width: 22px;
-        height: 22px;
-      }
-
-      .action-label {
-        font-size: 0.7rem;
-        margin-bottom: 0.1rem;
-      }
-
-      .action-description {
-        font-size: 0.75rem;
-      }
-
-      .action-arrow {
-        width: 20px;
-        height: 20px;
-      }
-
-      .proof-section {
-        
-        display: flex;
-        justify-content: center;
-        padding: 1.25rem 1rem;
-        width: 70%;
-        margin-left: 15%;
-        height: auto;
-      }
-
-      .proof-icon {
-        width: 16px;
-        height: 16px;
-        margin: 0 auto 0.5rem;
-        font-size: 1.25rem;
-      }
-
-      .proof-title {
-        font-size: 0.4rem;
-        margin-bottom: 0.2rem;
-      }
-
-      .proof-text {
-        font-size: 0.4rem;
-        line-height: 1;
-      }
-
-      .footer {
-        padding: 1.25rem 0 0.5rem;
-      }
-
-      .footer-domain {
-        font-size: 0.6rem;
-        margin-bottom: 0.375rem;
-        gap: 0.25rem;
-      }
-
-      .footer-domain svg {
-        width: 14px;
-        height: 14px;
-      }
-
-      .footer-copyright {
-        font-size: 0.5rem;
-      }
+    .speak::before,
+    .speak::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent));
     }
 
-    /* ===== ACCESSIBILITY ===== */
+    .speak::after {
+      background: linear-gradient(90deg, var(--accent), transparent);
+    }
+
+    .speak span {
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      color: var(--accent);
+      white-space: nowrap;
+    }
+
+    .social {
+      display: flex;
+      justify-content: center;
+      gap: 0.7rem;
+      margin-bottom: 0.85rem;
+    }
+
+    .social a {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--accent);
+      border-radius: 50%;
+      color: var(--white);
+      background: rgba(10, 37, 64, 0.4);
+      transition: transform var(--ease), background var(--ease), box-shadow var(--ease);
+    }
+
+    .social a svg { width: 17px; height: 17px; }
+    .social a:hover,
+    .social a:focus-visible {
+      transform: translateY(-2px);
+      background: rgba(59, 130, 246, 0.16);
+      box-shadow: 0 0 16px rgba(59, 130, 246, 0.25);
+    }
+
+    footer {
+      font-family: 'Sora', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: var(--white);
+    }
+
+    .card:focus-visible,
+    .social a:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
     @media (prefers-reduced-motion: reduce) {
-      * {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
+      .brand-logo img,
+      .brand h1,
+      .brand p,
+      .card,
+      .card-primary,
+      .bottom {
+        animation: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+        filter: drop-shadow(0 8px 18px rgba(59, 130, 246, 0.28));
       }
-
-      .logo-image,
-      .hero-title,
-      .hero-subtitle,
-      .benefits,
-      .cta-primary-section,
-      .actions,
-      .proof-section,
-      .footer {
-        animation: none;
-        opacity: 1;
+      .brand p::after {
+        animation: none !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
       }
     }
 
-   
-
-      .footer {
-        border-top-color: rgba(148, 163, 184, 0.1);
-      }
-
-      .footer-domain {
-        color: #2d81d4;
-      }
-
-      .footer-copyright {
-        color: #94A3B8;
-      }
-    
+    @media (max-height: 680px) {
+      .wrap { padding-top: 1.1rem; padding-bottom: 0.9rem; }
+      .brand-logo { width: 76px; height: 76px; margin-bottom: 0.7rem; }
+      .brand-logo img { width: 72px; height: 72px; }
+      .brand h1 { margin-bottom: 0.3rem; }
+      .links { gap: 0.55rem; }
+      .card { min-height: 56px; padding: 0.7rem 0.9rem; }
+    }
   </style>
 </head>
 <body>
-  <div class="container">
-    <!-- HERO SECTION -->
-    <section class="hero">
-      <div class="hero-logo">
-        <div class="logo-image">
-          <img src="../assets/logo identidade web.png" alt="Identidade Web" style="width: 150px; height: 150px;" />
-        </div>
+  <div class="wrap">
+    <header class="brand">
+      <div class="brand-logo">
+        <img src="../assets/logo%20identidade%20web.png" alt="Logo Identidade Web" width="88" height="88" />
       </div>
-      <h1 class="hero-title">Identidade <span class="highlight">Web</span></h1>
-      <p class="hero-subtitle">Sua empresa profissional na internet</p>
-    </section>
+      <h1>Identidade <span>Web</span></h1>
+      <p>Presença digital para o seu negócio</p>
+    </header>
 
-    <!-- BENEFITS SECTION -->
-    <section class="benefits">
-      <div class="benefit-card">
-        <div class="benefit-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M22 2L11 13M22 2l-7 20-5-9-9-5 20-7z"/>
-          </svg>
-        </div>
-        <span class="benefit-label">Sites modernos e responsivos</span>
-      </div>
-      <div class="benefit-card">
-        <div class="benefit-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
-            <polyline points="17 6 23 6 23 12"></polyline>
-          </svg>
-        </div>
-        <span class="benefit-label">SEO e performance que geram resultados</span>
-      </div>
-      <div class="benefit-card">
-        <div class="benefit-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-          </svg>
-        </div>
-        <span class="benefit-label">Presença digital com autoridade</span>
-      </div>
-    </section>
-
-    <!-- PRIMARY CTA -->
-    <section class="cta-primary-section" id="cta-whatsapp">
-      <div class="cta-primary-content">
-        <h2 class="cta-primary-title">Receber proposta gratuita</h2>
-        <p class="cta-primary-subtitle">Fale conosco pelo WhatsApp</p>
-      </div>
-      <div class="cta-icon-wrapper">
-        <svg viewBox="0 0 24 24" fill="currentColor">
-          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.881 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-        </svg>
-      </div>
-    </section>
-
-    <!-- ACTION CARDS -->
-    <section class="actions">
-      <a href="../index.html" class="action-card">
-        <div class="action-content">
-          <div class="action-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
-              <line x1="9" y1="9" x2="15" y2="9"/>
-              <line x1="9" y1="15" x2="15" y2="15"/>
-            </svg>
-          </div>
-          <div class="action-info">
-            <span class="action-label">Conheça nossos serviços</span>
-            <span class="action-description">Soluções completas para o seu negócio</span>
-          </div>
-        </div>
-        <svg class="action-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="9 18 15 12 9 6"></polyline>
-        </svg>
+    <nav class="links" aria-label="Ações">
+      <a class="card card-primary" href="https://identidadeweb.com/">
+        <span class="card-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 21h8M12 18v3"/></svg>
+        </span>
+        <span class="card-text">
+          <strong>Entrar no site</strong>
+          <span class="card-sub">Conheça a Identidade Web</span>
+        </span>
+        <svg class="card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
 
-      <a href="https://www.instagram.com/identidade.web" class="action-card" id="link-instagram">
-        <div class="action-content">
-          <div class="action-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
-              <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/>
-              <circle cx="17.5" cy="6.5" r="1.5"/>
-            </svg>
-          </div>
-          <div class="action-info">
-            <span class="action-label">Ver nosso Instagram</span>
-            <span class="action-description">Acompanhe conteúdos e novidades</span>
-          </div>
-        </div>
-        <svg class="action-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="9 18 15 12 9 6"></polyline>
-        </svg>
+      <a class="card" href="https://identidadeweb.com/#projetos">
+        <span class="card-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+        </span>
+        <span class="card-text">
+          <strong>Ver projetos</strong>
+          <span class="card-sub">Trabalhos da Identidade Web</span>
+        </span>
+        <svg class="card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
 
-      <a href="mailto:contato@identidadeweb.com?subject=Contato%20Identidade%20Web" class="action-card">
-        <div class="action-content">
-          <div class="action-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="2" y="4" width="20" height="16" rx="2"/>
-              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
-            </svg>
-          </div>
-          <div class="action-info">
-            <span class="action-label">Fale por e-mail</span>
-            <span class="action-description">Envie sua mensagem para nossa equipe</span>
-          </div>
-        </div>
-        <svg class="action-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="9 18 15 12 9 6"></polyline>
-        </svg>
+      <a class="card" href="https://identidadeweb.com/#servicos">
+        <span class="card-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg>
+        </span>
+        <span class="card-text">
+          <strong>Nossas soluções</strong>
+          <span class="card-sub">Sites, landing pages e sistemas</span>
+        </span>
+        <svg class="card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
 
-      <!--<a href="../index.html#servicos" class="action-card">
-        <div class="action-content">
-          <div class="action-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="10"/>
-              <path d="M12 16v-4M12 8h.01"/>
-            </svg>
-          </div>
-          <div class="action-info">
-            <span class="action-label">Portfólio</span>
-            <span class="action-description">Veja nossos projetos e cases</span>
-          </div>
-        </div>
-        <svg class="action-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="9 18 15 12 9 6"></polyline>
-        </svg>
-      </a>-->
-    </section>
+      <a class="card" id="cta-whatsapp" href="#">
+        <span class="card-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.881 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        </span>
+        <span class="card-text">
+          <strong>Falar com a Identidade Web</strong>
+          <span class="card-sub">Atendimento no WhatsApp</span>
+        </span>
+        <svg class="card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </nav>
 
-    <!-- PROOF SECTION -->
-   <!-- <section class="proof-section">
-      <div class="proof-icon">
-        <svg viewBox="0 0 24 24" fill="currentColor">
-          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-          <polyline points="9 12 12 15 15 9" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </div>
-      <h3 class="proof-title">Mais que sites, entregamos <span class="highlight">resultados.</span></h3>
-      <p class="proof-text">Estratégia, design e tecnologia para o crescimento da sua empresa.</p>
-    </section>-->
-
-    <!-- FOOTER -->
-    <footer class="footer">
-      <div class="footer-domain">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="12" cy="12" r="10"/>
-          <path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/>
-        </svg>
-        identidadeweb.com
-      </div>
-      <div class="footer-copyright">© 2026 Identidade Web. Todos os direitos reservados.</div>
-    </footer>
+    <div class="bottom">
+      <p class="speak"><span>Fale conosco</span></p>
+      <nav class="social" aria-label="Contato">
+        <a class="wa-link" href="#" aria-label="WhatsApp">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.881 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        </a>
+        <a id="link-instagram" href="https://www.instagram.com/identidade.web" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+        </a>
+        <a href="mailto:contato@identidadeweb.com?subject=Contato%20Identidade%20Web" aria-label="E-mail">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 7 9-7"/></svg>
+        </a>
+      </nav>
+      <footer>Identidade Web</footer>
+    </div>
   </div>
 
   <script>
-    (function() {
+    (function () {
       'use strict';
-
-      // Configuration
-      const WHATSAPP_NUMBER = '5592992534622';
-      const WHATSAPP_MESSAGE = 'Olá! Gostaria de conversar sobre os serviços de presença digital para meu negócio.';
-      const INSTAGRAM_URL = 'https://www.instagram.com/identidade.web';
-
-      // Setup CTA WhatsApp section as clickable
-      const ctaSection = document.getElementById('cta-whatsapp');
-      if (ctaSection) {
-        const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
-        ctaSection.addEventListener('click', function(e) {
-          if (e.target.closest('.cta-icon-wrapper, .cta-primary-content')) {
-            window.open(whatsappUrl, '_blank');
-          }
-        });
-        ctaSection.style.cursor = 'pointer';
-      }
-
-      // Setup Instagram link
-      const instagramLink = document.getElementById('link-instagram');
-      if (instagramLink && INSTAGRAM_URL) {
-        instagramLink.href = INSTAGRAM_URL;
-        instagramLink.setAttribute('target', '_blank');
-        instagramLink.setAttribute('rel', 'noopener noreferrer');
-      }
-
-      // Smooth scroll behavior
-      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-          const href = this.getAttribute('href');
-          if (href !== '#') {
-            e.preventDefault();
-            const target = document.querySelector(href);
-            if (target) {
-              target.scrollIntoView({ behavior: 'smooth' });
-            }
-          }
-        });
+      var WHATSAPP_NUMBER = '5592992534622';
+      var WHATSAPP_MESSAGE = 'Olá! Gostaria de conversar sobre os serviços de presença digital para meu negócio.';
+      var INSTAGRAM_URL = 'https://www.instagram.com/identidade.web';
+      var waUrl = 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(WHATSAPP_MESSAGE);
+      document.querySelectorAll('.wa-link, #cta-whatsapp').forEach(function (el) {
+        el.href = waUrl;
+        el.target = '_blank';
+        el.rel = 'noopener noreferrer';
       });
-
-      // Analytics event tracking (optional)
-      const trackEvent = (eventName, eventData = {}) => {
-        if (typeof gtag !== 'undefined') {
-          gtag('event', eventName, eventData);
-        }
-      };
-
-      // Track link clicks
-      document.querySelectorAll('a, .cta-primary-section').forEach(link => {
-        link.addEventListener('click', function() {
-          const href = this.getAttribute('href') || WHATSAPP_NUMBER;
-          const text = this.textContent.trim();
-          trackEvent('link_click', {
-            'link_text': text,
-            'link_href': href
-          });
-        });
-      });
+      var ig = document.getElementById('link-instagram');
+      if (ig) ig.href = INSTAGRAM_URL;
     })();
   </script>
 </body>

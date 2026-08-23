@@ -90,13 +90,19 @@ identidade web/
 - **Serviços** (cinza): 6 cards.
 - **Depoimentos**: 3 cards (2 Unsplash, 1 `mariana-costa.jpg`).
 - **Stats**: 100+ / 300+ / 95% via IntersectionObserver.
-- **Oferta**: R$ 3,90 no 1º mês e R$ 890/ano.
+- **Oferta / soluções** (`#oferta`, `.pricing-grid`): 4 opções, não uma tabela de assinatura.
+  1. **Landing Page:** R$ 400 a R$ 600. Domínio e hospedagem **não** inclusos.
+  2. **Site Institucional:** R$ 900 a R$ 1.400. Domínio e hospedagem **não** inclusos.
+  3. **Estrutura Completa** (destaque `.pricing-card--featured`, selo "Mais completa"): R$ 3,90 no 1º mês, depois R$ 89/mês. Bloco anual R$ 890 (de R$ 1.068, economia R$ 178). Domínio e hospedagem **inclusos**.
+  4. **Projetos Sob Medida:** a combinar (sistemas, lojas, plataformas).
+- CTAs da oferta usam `.wa-link` + `data-wa-message` (mensagem específica por pacote). O JS do WhatsApp lê esse atributo; links sem o atributo seguem a mensagem padrão.
 - **CTA final** + **formulário Zoho** (iframe).
 
 ### Responsividade
 - `html`/`body`: `overflow-x: hidden` + `overflow-x: clip`.
 - Botões full-width ≤640px.
 - Portfólio em uma coluna no mobile (imagem primeiro).
+- **Oferta:** 1 coluna no celular (layout aprovado). **Notebook (≥700px): grid 2×2** (Landing | Institucional / Completa | Sob Medida). Não voltar para 4 colunas estreitas em tela de notebook. No desktop, a lista duplicada do bloco anual fica oculta (`.pricing-annual .pricing-features { display: none }`).
 
 ---
 
@@ -111,6 +117,7 @@ identidade web/
 | **Cases** | Páginas curtas e comerciais, não longas. CSS/JS em arquivos à parte só nessa pasta. |
 | **Copy** | Curta, premium, **sem travessão (—)**. |
 | **Logos** | Sem card, sempre coloridas. |
+| **Oferta** | 4 soluções (não SaaS). Completa em destaque. Mobile 1 coluna; notebook 2×2. |
 
 ---
 
@@ -146,6 +153,7 @@ identidade web/
 - **Especificidade CSS** no index: `.main-nav .nav-cta` vence `.main-nav a`.
 - **Imagens com espaços:** URL-encoding nos `src`. Conferir o nome exato em `assets/`.
 - **Marquee de logos:** `margin-right` nos `.logo-item` + duplicação do track no JS.
+- **Oferta:** não alterar valores. Landing/institucional sem domínio/hospedagem. Completa inclui. WhatsApp por pacote via `data-wa-message`.
 - **Copy:** não usar travessão (—). Preferir vírgula ou dois-pontos.
 - **Verificação mobile:** viewport ~390px e `overflow-x: clip`.
 - **Commit:** o usuário comita manualmente, mensagens curtas em pt-BR. Não force push.
