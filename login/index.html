@@ -16,9 +16,9 @@
       --accent: #3B82F6;
       --accent-hover: #2563EB;
       --white: #FFFFFF;
-      --muted: #5B6B7C;
+      --muted: #64748B;
       --line: #E2E8F0;
-      --bg: #F4F7FB;
+      --bg: #F8FAFC;
       --error: #B42318;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -27,74 +27,57 @@
       font-family: Inter, system-ui, sans-serif;
       color: var(--navy);
       background: var(--bg);
-      display: flex;
-      flex-direction: column;
       min-height: 100vh;
     }
     body::before {
       content: '';
       display: block;
       height: 3px;
-      width: 100%;
       background: var(--accent);
-      flex-shrink: 0;
     }
     .wrap {
-      flex: 1;
+      min-height: calc(100vh - 3px);
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 1.5rem 1.25rem 2.5rem;
+      padding: 2rem 1.25rem;
     }
     .card {
       width: 100%;
-      max-width: 400px;
+      max-width: 380px;
       background: var(--white);
       border: 1px solid var(--line);
       border-radius: 16px;
-      padding: 2rem 1.5rem 1.75rem;
-      box-shadow: 0 10px 30px rgba(10, 37, 64, 0.06);
+      padding: 2.25rem 1.75rem 1.85rem;
+      box-shadow: 0 12px 32px rgba(10, 37, 64, 0.05);
     }
     .brand {
       display: flex;
       align-items: center;
       gap: 0.6rem;
-      margin-bottom: 1.5rem;
+      margin-bottom: 2rem;
     }
-    .brand img {
-      height: 40px;
-      width: auto;
-      display: block;
-    }
+    .brand img { height: 36px; width: auto; display: block; }
     .brand span {
       font-family: Sora, sans-serif;
       font-weight: 700;
-      font-size: 1.05rem;
+      font-size: 1.02rem;
       letter-spacing: -0.02em;
     }
-    .brand span em {
-      font-style: normal;
-      color: var(--accent);
-    }
+    .brand span em { font-style: normal; color: var(--accent); }
     h1 {
       font-family: Sora, sans-serif;
-      font-size: 1.45rem;
+      font-size: 1.35rem;
       letter-spacing: -0.03em;
-      margin-bottom: 0.35rem;
-    }
-    .lead {
-      color: var(--muted);
-      font-size: 0.95rem;
-      line-height: 1.45;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.35rem;
     }
     label {
       display: block;
-      font-size: 0.82rem;
+      font-size: 0.8rem;
       font-weight: 600;
       margin-bottom: 0.4rem;
     }
-    .field { margin-bottom: 1rem; }
+    .field { margin-bottom: 0.95rem; }
     input {
       width: 100%;
       height: 48px;
@@ -105,18 +88,14 @@
       color: var(--navy);
       background: var(--white);
       outline: none;
-      transition: border-color 0.2s ease, box-shadow 0.2s ease;
     }
     input:focus {
       border-color: var(--accent);
-      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.18);
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.16);
     }
     .error {
       display: none;
       margin: 0 0 1rem;
-      padding: 0.7rem 0.8rem;
-      border-radius: 10px;
-      background: #FEF3F2;
       color: var(--error);
       font-size: 0.88rem;
       font-weight: 500;
@@ -131,27 +110,19 @@
       color: var(--white);
       font: 600 0.95rem/1 Inter, system-ui, sans-serif;
       cursor: pointer;
-      transition: background 0.2s ease;
     }
     button:hover { background: var(--accent-hover); }
-    button:disabled {
-      opacity: 0.7;
-      cursor: wait;
-    }
-    @media (max-width: 480px) {
-      .card { padding: 1.5rem 1.15rem 1.4rem; }
-    }
+    button:disabled { opacity: 0.7; cursor: wait; }
   </style>
 </head>
 <body>
   <main class="wrap">
     <form class="card" id="login-form" novalidate>
       <div class="brand">
-        <img src="/assets/logo%20identidade%20web.png" alt="Identidade Web" width="40" height="40" />
+        <img src="/assets/logo%20identidade%20web.png" alt="Identidade Web" width="36" height="36" />
         <span>Identidade <em>Web</em></span>
       </div>
       <h1>Entrar</h1>
-      <p class="lead">Área administrativa. Informe seu e-mail e senha.</p>
       <div class="field">
         <label for="email">E-mail</label>
         <input id="email" name="email" type="email" inputmode="email" autocomplete="username" required />
@@ -160,7 +131,7 @@
         <label for="password">Senha</label>
         <input id="password" name="password" type="password" autocomplete="current-password" required />
       </div>
-      <p class="error" id="login-error" role="alert">E-mail ou senha inválidos.</p>
+      <p class="error" id="login-error" role="alert"></p>
       <button type="submit" id="login-submit">Entrar</button>
     </form>
   </main>
@@ -175,11 +146,13 @@
       var submitEl = document.getElementById('login-submit');
       var sending = false;
 
-      function showError() {
+      function showError(message) {
+        errorEl.textContent = message;
         errorEl.classList.add('is-shown');
       }
 
       function hideError() {
+        errorEl.textContent = '';
         errorEl.classList.remove('is-shown');
       }
 
@@ -194,7 +167,7 @@
         var email = (emailEl.value || '').replace(/^\s+|\s+$/g, '');
         var password = passwordEl.value || '';
         if (!email || !password) {
-          showError();
+          showError('Informe e-mail e senha.');
           return;
         }
 
@@ -205,8 +178,12 @@
 
         IWAuth.signIn(email, password).then(function (result) {
           if (result.error || !result.data || !result.data.session) {
-            console.error('Login: e-mail ou senha inválidos.');
-            showError();
+            var code = result.error && result.error.code;
+            if (code === 'email_not_confirmed') {
+              showError('Confirme seu e-mail.');
+            } else {
+              showError('E-mail ou senha inválidos.');
+            }
             sending = false;
             submitEl.disabled = false;
             submitEl.textContent = 'Entrar';
@@ -214,8 +191,8 @@
           }
           window.location.replace('/crm/');
         }).catch(function () {
-          console.error('Login: não foi possível autenticar.');
-          showError();
+          console.error('Login: configuração indisponível.');
+          showError('Não foi possível entrar.');
           sending = false;
           submitEl.disabled = false;
           submitEl.textContent = 'Entrar';
