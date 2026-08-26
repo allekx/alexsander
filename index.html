@@ -2525,6 +2525,7 @@
       var phoneError = document.getElementById('bob-phone-error');
       var bobName = '';
       var bobPhone = '';
+      var bobSent = false;
       var waBtn = document.getElementById('bob-wa');
       var closeBtn = document.getElementById('bob-close');
       if (!bob || !form || !nameInput || !phoneForm || !phoneInput) return;
@@ -2591,8 +2592,25 @@
         phoneError.classList.remove('bob-is-shown');
       });
 
+      function sendBobContact(name, phone) {
+        fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: name,
+            phone: phone,
+            source: 'Bob'
+          })
+        }).then(function (res) {
+          if (!res.ok) console.error('Bob: não foi possível salvar o contato.');
+        }).catch(function () {
+          console.error('Bob: não foi possível salvar o contato.');
+        });
+      }
+
       phoneForm.addEventListener('submit', function (e) {
         e.preventDefault();
+        if (bobSent) return;
         var digits = (phoneInput.value || '').replace(/\D/g, '');
         if (digits.length !== 11) {
           phoneError.classList.add('bob-is-shown');
@@ -2601,12 +2619,14 @@
         }
         phoneError.classList.remove('bob-is-shown');
         bobPhone = digits;
+        bobSent = true;
         hiEl.textContent = 'Perfeito, ' + bobName + '!';
         askEl.textContent = 'Obrigado! Já tenho seu contato.';
         phoneForm.classList.add('bob-is-hidden');
         if (waBtn) waBtn.classList.remove('bob-is-shown');
         bob.classList.remove('bob-keyboard-open');
         bob.style.bottom = '';
+        sendBobContact(bobName, bobPhone);
         window.setTimeout(function () {
           hideBob(false);
         }, 1800);

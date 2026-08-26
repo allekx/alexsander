@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="auth-pending">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="theme-color" content="#0A2540" />
+  <title>CRM | Identidade Web</title>
+  <link rel="icon" type="image/png" href="/assets/logo%20identidade%20web.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy: #0A2540;
+      --accent: #3B82F6;
+      --accent-hover: #2563EB;
+      --white: #FFFFFF;
+      --bg: #F8FAFC;
+      --muted: #5B6B7C;
+      --text: #334155;
+      --line: #E2E8F0;
+      --error: #B42318;
+      --bob-bg: #EFF6FF;
+      --bob-text: #1D4ED8;
+      --manual-bg: #F1F5F9;
+      --manual-text: #334155;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html.auth-pending body { visibility: hidden; }
+    body {
+      font-family: Inter, system-ui, sans-serif;
+      color: var(--navy);
+      background: var(--bg);
+      min-height: 100vh;
+    }
+    body.modal-open { overflow: hidden; }
+    button, input { font-family: inherit; }
+    .bar { height: 3px; background: var(--accent); }
+    .top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      padding: 0.85rem 1.25rem;
+      background: var(--white);
+      border-bottom: 1px solid var(--line);
+    }
+    .brand { display: flex; align-items: center; gap: 0.55rem; min-width: 0; }
+    .brand img { height: 36px; width: auto; display: block; }
+    .brand-name {
+      font-family: Sora, sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: -0.02em;
+      white-space: nowrap;
+    }
+    .brand-name em { font-style: normal; color: var(--accent); }
+    .crm-label {
+      padding: 0.2rem 0.55rem;
+      border-radius: 999px;
+      background: #EFF6FF;
+      color: var(--accent);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+    #logout {
+      border: 1px solid var(--line);
+      background: var(--white);
+      color: var(--navy);
+      height: 40px;
+      padding: 0 1.1rem;
+      border-radius: 999px;
+      font: 600 0.88rem/1 Inter, system-ui, sans-serif;
+      cursor: pointer;
+    }
+    #logout:hover { border-color: var(--accent); color: var(--accent); }
+    .wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2rem 1.25rem 3rem;
+    }
+    .page-title {
+      font-family: Sora, sans-serif;
+      font-size: 1.7rem;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.3rem;
+    }
+    .page-lead { color: var(--muted); margin-bottom: 1.5rem; }
+    .stat {
+      display: inline-flex;
+      flex-direction: column;
+      min-width: 180px;
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 1.1rem 1.2rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 8px 24px rgba(10, 37, 64, 0.04);
+    }
+    .stat-value {
+      font-family: Sora, sans-serif;
+      font-size: 1.8rem;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+    }
+    .stat-label { margin-top: 0.25rem; color: var(--muted); font-size: 0.88rem; }
+    .toolbar {
+      display: flex;
+      gap: 0.75rem;
+      align-items: center;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+    }
+    .search {
+      flex: 1;
+      min-width: 200px;
+      height: 46px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 0 0.95rem;
+      font-size: 16px;
+      color: var(--navy);
+      background: var(--white);
+      outline: none;
+    }
+    .search:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.16);
+    }
+    .btn {
+      height: 46px;
+      border: 0;
+      border-radius: 999px;
+      padding: 0 1.15rem;
+      font: 600 0.92rem/1 Inter, system-ui, sans-serif;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .btn-primary { background: var(--accent); color: var(--white); }
+    .btn-primary:hover { background: var(--accent-hover); }
+    .btn-ghost {
+      background: var(--white);
+      color: var(--navy);
+      border: 1px solid var(--line);
+    }
+    .btn-danger { background: #DC2626; color: var(--white); }
+    .btn:disabled { opacity: 0.7; cursor: wait; }
+    .panel {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 8px 24px rgba(10, 37, 64, 0.04);
+    }
+    .state {
+      padding: 2.2rem 1.25rem;
+      text-align: center;
+      color: var(--muted);
+    }
+    .state p { margin-bottom: 1rem; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td {
+      text-align: left;
+      padding: 0.9rem 1rem;
+      font-size: 0.92rem;
+      border-bottom: 1px solid var(--line);
+      vertical-align: middle;
+    }
+    th {
+      color: var(--muted);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      background: #F8FAFC;
+    }
+    tbody tr:last-child td { border-bottom: 0; }
+    .name { font-weight: 600; color: var(--navy); }
+    .phone, .date { color: var(--text); white-space: nowrap; }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      height: 26px;
+      padding: 0 0.6rem;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 600;
+    }
+    .badge-bob { background: var(--bob-bg); color: var(--bob-text); }
+    .badge-manual { background: var(--manual-bg); color: var(--manual-text); }
+    .actions { display: flex; gap: 0.35rem; }
+    .link-btn {
+      height: 36px;
+      padding: 0 0.65rem;
+      border: 0;
+      background: transparent;
+      color: var(--accent);
+      font: 600 0.84rem/1 Inter, system-ui, sans-serif;
+      cursor: pointer;
+    }
+    .link-btn.danger { color: var(--error); }
+    .cards { display: none; }
+    .card {
+      padding: 1rem 1.1rem;
+      border-bottom: 1px solid var(--line);
+    }
+    .card:last-child { border-bottom: 0; }
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.75rem;
+      align-items: flex-start;
+      margin-bottom: 0.45rem;
+    }
+    .card-meta {
+      color: var(--text);
+      font-size: 0.9rem;
+      line-height: 1.55;
+      margin-bottom: 0.55rem;
+    }
+    .modal {
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+    .modal.is-open { display: flex; }
+    .backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(10, 37, 64, 0.45);
+    }
+    .dialog {
+      position: relative;
+      width: 100%;
+      max-width: 420px;
+      background: var(--white);
+      border-radius: 16px;
+      padding: 1.4rem 1.25rem 1.25rem;
+      box-shadow: 0 20px 50px rgba(10, 37, 64, 0.18);
+    }
+    .dialog h2 {
+      font-family: Sora, sans-serif;
+      font-size: 1.2rem;
+      margin-bottom: 0.35rem;
+    }
+    .dialog .hint {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-bottom: 1.1rem;
+    }
+    .field { margin-bottom: 0.9rem; }
+    label {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 600;
+      margin-bottom: 0.35rem;
+    }
+    .dialog input {
+      width: 100%;
+      height: 46px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 0 0.85rem;
+      font-size: 16px;
+      color: var(--navy);
+      outline: none;
+    }
+    .dialog input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.16);
+    }
+    .form-error {
+      display: none;
+      margin-bottom: 0.85rem;
+      color: var(--error);
+      font-size: 0.88rem;
+      font-weight: 500;
+    }
+    .form-error.is-shown { display: block; }
+    .dialog-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 0.6rem;
+      margin-top: 0.4rem;
+    }
+    .close-x {
+      position: absolute;
+      top: 0.7rem;
+      right: 0.7rem;
+      width: 36px;
+      height: 36px;
+      border: 0;
+      background: transparent;
+      color: var(--muted);
+      font-size: 1.3rem;
+      cursor: pointer;
+    }
+    @media (max-width: 800px) {
+      .table-wrap { display: none; }
+      .cards { display: block; }
+      .brand-name { font-size: 0.92rem; }
+      .wrap { padding: 1.4rem 1rem 2.5rem; }
+      .page-title { font-size: 1.4rem; }
+      .toolbar { flex-direction: column; align-items: stretch; }
+      .toolbar .btn { width: 100%; }
+    }
+    @media (max-width: 420px) {
+      .brand-name { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="bar"></div>
+  <header class="top">
+    <div class="brand">
+      <img src="/assets/logo%20identidade%20web.png" alt="Identidade Web" width="36" height="36" />
+      <span class="brand-name">Identidade <em>Web</em></span>
+      <span class="crm-label">CRM</span>
+    </div>
+    <button type="button" id="logout">Sair</button>
+  </header>
+
+  <main class="wrap">
+    <h1 class="page-title">Contatos</h1>
+    <p class="page-lead">Gerencie os contatos recebidos</p>
+
+    <div class="stat">
+      <span class="stat-value" id="total-count">0</span>
+      <span class="stat-label">Contatos cadastrados</span>
+    </div>
+
+    <div class="toolbar">
+      <input class="search" id="search" type="search" placeholder="Pesquisar contatos..." autocomplete="off" />
+      <button class="btn btn-primary" type="button" id="add-btn">+ Adicionar contato</button>
+    </div>
+
+    <div class="panel">
+      <div class="state" id="state-loading">Carregando contatos...</div>
+      <div class="state" id="state-error" hidden>
+        <p>Não foi possível carregar os contatos.</p>
+      </div>
+      <div class="state" id="state-empty" hidden>
+        <p>Você ainda não possui contatos.</p>
+        <button class="btn btn-primary" type="button" id="empty-add">Adicionar contato</button>
+      </div>
+      <div class="state" id="state-none" hidden>Nenhum contato encontrado.</div>
+
+      <div class="table-wrap" id="table-wrap" hidden>
+        <table>
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>Telefone</th>
+              <th>Origem</th>
+              <th>Data</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="table-body"></tbody>
+        </table>
+      </div>
+      <div class="cards" id="cards" hidden></div>
+    </div>
+  </main>
+
+  <div class="modal" id="form-modal" aria-hidden="true">
+    <div class="backdrop" data-close="form"></div>
+    <div class="dialog" role="dialog" aria-modal="true" aria-labelledby="form-title">
+      <button class="close-x" type="button" data-close="form" aria-label="Fechar">&times;</button>
+      <h2 id="form-title">Adicionar contato</h2>
+      <p class="hint">Informe nome e telefone.</p>
+      <form id="contact-form" novalidate>
+        <div class="field">
+          <label for="contact-name">Nome</label>
+          <input id="contact-name" name="name" type="text" maxlength="100" autocomplete="off" />
+        </div>
+        <div class="field">
+          <label for="contact-phone">Telefone</label>
+          <input id="contact-phone" name="phone" type="tel" inputmode="numeric" autocomplete="off" />
+        </div>
+        <p class="form-error" id="form-error"></p>
+        <div class="dialog-actions">
+          <button class="btn btn-ghost" type="button" data-close="form">Cancelar</button>
+          <button class="btn btn-primary" type="submit" id="form-submit">Salvar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal" id="delete-modal" aria-hidden="true">
+    <div class="backdrop" data-close="delete"></div>
+    <div class="dialog" role="dialog" aria-modal="true" aria-labelledby="delete-title">
+      <button class="close-x" type="button" data-close="delete" aria-label="Fechar">&times;</button>
+      <h2 id="delete-title">Excluir este contato?</h2>
+      <p class="hint">Essa ação não pode ser desfeita.</p>
+      <div class="dialog-actions">
+        <button class="btn btn-ghost" type="button" data-close="delete">Cancelar</button>
+        <button class="btn btn-danger" type="button" id="delete-confirm">Excluir</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.8/dist/umd/supabase.js"></script>
+  <script src="/js/auth.js"></script>
+  <script>
+    (function () {
+      var contacts = [];
+      var query = '';
+      var editingId = null;
+      var deletingId = null;
+      var sending = false;
+
+      var logoutBtn = document.getElementById('logout');
+      var totalEl = document.getElementById('total-count');
+      var searchEl = document.getElementById('search');
+      var addBtn = document.getElementById('add-btn');
+      var emptyAddBtn = document.getElementById('empty-add');
+      var loadingEl = document.getElementById('state-loading');
+      var errorEl = document.getElementById('state-error');
+      var emptyEl = document.getElementById('state-empty');
+      var noneEl = document.getElementById('state-none');
+      var tableWrap = document.getElementById('table-wrap');
+      var tableBody = document.getElementById('table-body');
+      var cardsEl = document.getElementById('cards');
+      var formModal = document.getElementById('form-modal');
+      var deleteModal = document.getElementById('delete-modal');
+      var form = document.getElementById('contact-form');
+      var formTitle = document.getElementById('form-title');
+      var nameEl = document.getElementById('contact-name');
+      var phoneEl = document.getElementById('contact-phone');
+      var formError = document.getElementById('form-error');
+      var formSubmit = document.getElementById('form-submit');
+      var deleteConfirm = document.getElementById('delete-confirm');
+
+      function digits(value) {
+        return String(value || '').replace(/\D/g, '').slice(0, 11);
+      }
+
+      function maskPhone(value) {
+        var d = digits(value);
+        if (!d) return '';
+        if (d.length <= 2) return '(' + d;
+        if (d.length <= 7) return '(' + d.slice(0, 2) + ') ' + d.slice(2);
+        return '(' + d.slice(0, 2) + ') ' + d.slice(2, 7) + '-' + d.slice(7);
+      }
+
+      function formatPhone(value) {
+        var d = digits(value);
+        return d.length === 11 ? maskPhone(d) : (d || '—');
+      }
+
+      function formatDate(value) {
+        if (!value) return '—';
+        var d = new Date(value);
+        if (isNaN(d.getTime())) return '—';
+        return d.toLocaleDateString('pt-BR') + ' às ' + d.toLocaleTimeString('pt-BR', {
+          hour: '2-digit',
+          minute: '2-digit'
+        });
+      }
+
+      function badgeHtml(source) {
+        var isBob = source === 'Bob';
+        return '<span class="badge ' + (isBob ? 'badge-bob' : 'badge-manual') + '">' + (isBob ? 'Bob' : 'Manual') + '</span>';
+      }
+
+      function escapeHtml(value) {
+        return String(value || '')
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;');
+      }
+
+      function setModal(el, open) {
+        el.classList.toggle('is-open', open);
+        el.setAttribute('aria-hidden', open ? 'false' : 'true');
+        var anyOpen = formModal.classList.contains('is-open') || deleteModal.classList.contains('is-open');
+        document.body.classList.toggle('modal-open', anyOpen);
+      }
+
+      function showFormError(message) {
+        formError.textContent = message;
+        formError.classList.add('is-shown');
+      }
+
+      function hideFormError() {
+        formError.textContent = '';
+        formError.classList.remove('is-shown');
+      }
+
+      function filteredContacts() {
+        var q = String(query || '').toLowerCase();
+        if (!q) return contacts.slice();
+        var qDigits = digits(q);
+        return contacts.filter(function (c) {
+          var name = String(c.name || '').toLowerCase();
+          var phone = digits(c.phone);
+          return name.indexOf(q) !== -1 || (qDigits && phone.indexOf(qDigits) !== -1);
+        });
+      }
+
+      function actionButtons(id) {
+        return '<div class="actions">' +
+          '<button class="link-btn" type="button" data-edit="' + escapeHtml(id) + '">Editar</button>' +
+          '<button class="link-btn danger" type="button" data-delete="' + escapeHtml(id) + '">Excluir</button>' +
+          '</div>';
+      }
+
+      function render() {
+        totalEl.textContent = String(contacts.length);
+        loadingEl.hidden = true;
+        errorEl.hidden = true;
+        emptyEl.hidden = true;
+        noneEl.hidden = true;
+        tableWrap.hidden = true;
+        cardsEl.hidden = true;
+
+        if (!contacts.length) {
+          emptyEl.hidden = false;
+          return;
+        }
+
+        var rows = filteredContacts();
+        if (!rows.length) {
+          noneEl.hidden = false;
+          return;
+        }
+
+        tableBody.innerHTML = rows.map(function (c) {
+          return '<tr>' +
+            '<td class="name">' + escapeHtml(c.name) + '</td>' +
+            '<td class="phone">' + escapeHtml(formatPhone(c.phone)) + '</td>' +
+            '<td>' + badgeHtml(c.source) + '</td>' +
+            '<td class="date">' + escapeHtml(formatDate(c.created_at)) + '</td>' +
+            '<td>' + actionButtons(c.id) + '</td>' +
+            '</tr>';
+        }).join('');
+
+        cardsEl.innerHTML = rows.map(function (c) {
+          return '<article class="card">' +
+            '<div class="card-top"><strong class="name">' + escapeHtml(c.name) + '</strong>' + badgeHtml(c.source) + '</div>' +
+            '<div class="card-meta">' + escapeHtml(formatPhone(c.phone)) + '<br>' + escapeHtml(formatDate(c.created_at)) + '</div>' +
+            actionButtons(c.id) +
+            '</article>';
+        }).join('');
+
+        tableWrap.hidden = false;
+        cardsEl.hidden = false;
+      }
+
+      function api(method, body) {
+        return IWAuth.getSession().then(function (session) {
+          if (!session || !session.access_token) {
+            window.location.replace('/login/');
+            return null;
+          }
+          var opts = {
+            method: method,
+            headers: {
+              Accept: 'application/json',
+              Authorization: 'Bearer ' + session.access_token
+            }
+          };
+          if (body) {
+            opts.headers['Content-Type'] = 'application/json';
+            opts.body = JSON.stringify(body);
+          }
+          return fetch('/api/crm', opts);
+        }).then(function (res) {
+          if (!res) return null;
+          if (res.status === 401) {
+            window.location.replace('/login/');
+            return null;
+          }
+          return res;
+        });
+      }
+
+      function loadContacts() {
+        loadingEl.hidden = false;
+        errorEl.hidden = true;
+        emptyEl.hidden = true;
+        noneEl.hidden = true;
+        tableWrap.hidden = true;
+        cardsEl.hidden = true;
+
+        return api('GET').then(function (res) {
+          if (!res) return;
+          if (!res.ok) throw new Error('load');
+          return res.json();
+        }).then(function (data) {
+          if (!data) return;
+          contacts = Array.isArray(data) ? data : [];
+          render();
+        }).catch(function () {
+          console.error('CRM: não foi possível carregar os contatos.');
+          loadingEl.hidden = true;
+          errorEl.hidden = false;
+        });
+      }
+
+      function openCreate() {
+        editingId = null;
+        formTitle.textContent = 'Adicionar contato';
+        form.reset();
+        nameEl.value = '';
+        phoneEl.value = '';
+        hideFormError();
+        setModal(formModal, true);
+        nameEl.focus();
+      }
+
+      function openEdit(id) {
+        var item = null;
+        for (var i = 0; i < contacts.length; i++) {
+          if (contacts[i].id === id) { item = contacts[i]; break; }
+        }
+        if (!item) return;
+        editingId = id;
+        formTitle.textContent = 'Editar contato';
+        nameEl.value = item.name || '';
+        phoneEl.value = maskPhone(item.phone);
+        hideFormError();
+        setModal(formModal, true);
+        nameEl.focus();
+      }
+
+      function openDelete(id) {
+        deletingId = id;
+        setModal(deleteModal, true);
+      }
+
+      function closeForm() {
+        setModal(formModal, false);
+        editingId = null;
+        sending = false;
+        formSubmit.disabled = false;
+        formSubmit.textContent = 'Salvar';
+      }
+
+      function closeDelete() {
+        setModal(deleteModal, false);
+        deletingId = null;
+      }
+
+      logoutBtn.addEventListener('click', function () {
+        IWAuth.signOut();
+      });
+      addBtn.addEventListener('click', openCreate);
+      emptyAddBtn.addEventListener('click', openCreate);
+
+      searchEl.addEventListener('input', function () {
+        query = searchEl.value || '';
+        render();
+      });
+
+      phoneEl.addEventListener('input', function () {
+        phoneEl.value = maskPhone(phoneEl.value);
+      });
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        if (sending) return;
+
+        var name = (nameEl.value || '').replace(/^\s+|\s+$/g, '');
+        var phone = digits(phoneEl.value);
+        if (!name) {
+          showFormError('Digite o nome.');
+          nameEl.focus();
+          return;
+        }
+        if (phone.length !== 11) {
+          showFormError('Digite um telefone válido.');
+          phoneEl.focus();
+          return;
+        }
+
+        sending = true;
+        hideFormError();
+        formSubmit.disabled = true;
+        formSubmit.textContent = 'Salvando...';
+
+        var req = editingId
+          ? api('PATCH', { id: editingId, name: name, phone: phone })
+          : api('POST', { name: name, phone: phone });
+
+        req.then(function (res) {
+          if (!res) return;
+          if (!res.ok) throw new Error('save');
+          closeForm();
+          return loadContacts();
+        }).catch(function () {
+          console.error('CRM: não foi possível salvar o contato.');
+          showFormError(editingId ? 'Não foi possível salvar as alterações.' : 'Não foi possível adicionar o contato.');
+          sending = false;
+          formSubmit.disabled = false;
+          formSubmit.textContent = 'Salvar';
+        });
+      });
+
+      deleteConfirm.addEventListener('click', function () {
+        if (!deletingId || sending) return;
+        sending = true;
+        api('DELETE', { id: deletingId }).then(function (res) {
+          if (!res) return;
+          if (!res.ok) throw new Error('delete');
+          closeDelete();
+          sending = false;
+          return loadContacts();
+        }).catch(function () {
+          console.error('CRM: não foi possível excluir o contato.');
+          sending = false;
+        });
+      });
+
+      document.addEventListener('click', function (e) {
+        var t = e.target;
+        if (!t || !t.getAttribute) return;
+        var editId = t.getAttribute('data-edit');
+        var deleteId = t.getAttribute('data-delete');
+        var closeKind = t.getAttribute('data-close');
+        if (editId) openEdit(editId);
+        if (deleteId) openDelete(deleteId);
+        if (closeKind === 'form') closeForm();
+        if (closeKind === 'delete') closeDelete();
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key !== 'Escape') return;
+        if (formModal.classList.contains('is-open')) closeForm();
+        if (deleteModal.classList.contains('is-open')) closeDelete();
+      });
+
+      IWAuth.requireAuth().then(function (session) {
+        if (!session) return;
+        document.documentElement.classList.remove('auth-pending');
+        loadContacts();
+      });
+    })();
+  </script>
+</body>
+</html>

@@ -10,99 +10,107 @@ Guia de desenvolvimento do site institucional da **Identidade Web** (criação d
   - `index.html` e `bio/index.html`: CSS e JS **embutidos**.
   - Páginas de case em `projetos/`: CSS e JS **compartilhados** (`projetos/case.css` + `projetos/case.js`).
 - **Deploy:** GitHub Pages (arquivo `CNAME` aponta para `identidadeweb.com`).
-- **Fontes:** Google Fonts, **Inter** (corpo) + **Sora** (títulos). Sora substituiu Poppins.
+- **Fontes:** Google Fonts, **Inter** (corpo) + **Sora** (títulos).
 - **Sem imagens de background na seção de logos** (decisão deliberada).
 
 ### Estrutura de arquivos
 
 ```
 identidade web/
-├── index.html                 ← Página principal (~2.093 linhas)
-├── bio/index.html              ← Página "link na bio" (ciano/verde, ainda destoa)
+├── index.html                 ← Página principal (site + widget Bob)
+├── bio/index.html              ← Link na bio (navy + azul, compacta)
 ├── projetos/
-│   ├── shekinah.html          ← Case Sítio Shekinah
-│   ├── celus.html             ← Case Escola Celus
-│   ├── loja-lm.html            ← Case Loja LM
-│   ├── case.css               ← Estilos das páginas de case (header, layout, CTA)
-│   └── case.js                ← WhatsApp, menu mobile, header scrolled, reveal
+│   ├── shekinah.html
+│   ├── celus.html
+│   ├── loja-lm.html
+│   ├── case.css
+│   └── case.js
 ├── assets/
+│   ├── bob/
+│   │   ├── bob-acenando.png
+│   │   └── bob-beleza.png
 │   ├── Logo celus (1).png
 │   ├── anadem.png
 │   ├── elite corte.png
-│   ├── identidadeweb modelo.png   ← banner/imagem do hero
-│   ├── logo identidade web.png    ← logo da marca (referenciada no HTML)
+│   ├── identidadeweb modelo.png
+│   ├── logo identidade web.png
 │   ├── logo_seguremed.png
-│   ├── mariana-costa.jpg            ← avatar de depoimento
+│   ├── mariana-costa.jpg
 │   ├── odonto prime.png
-│   ├── carrossel celus.png          ← mockup do case Celus
-│   └── telas shekinah.png          ← telas do sistema Shekinah
-├── prints/                    ← Screenshots de verificação
+│   ├── carrossel celus.png
+│   └── telas shekinah.png
+├── prints/
 └── CNAME                      ← identidadeweb.com
 ```
 
-> Arquivos com espaços/parênteses usam URL-encoding no HTML (ex.: `assets/elite%20corte.png`, `assets/Logo%20celus%20(1).png`, `assets/telas%20shekinah.png`). Preserve esse padrão.
-
-> Imagem ainda pendente: `assets/loja lm.png` (card e case da Loja LM). Sem o arquivo, o overlay navy + texto permanece via `onerror="this.hidden=true"`.
+> Arquivos com espaços/parênteses usam URL-encoding no HTML (ex.: `assets/elite%20corte.png`). Preserve esse padrão.
 
 ---
 
 ## O que já foi implementado
 
-### Header / Menu de navegação
-- **Header fixo** com faixa azul de 3px no topo e dois estados:
-  - **Sem rolagem:** barra branca full-width, conteúdo com `width: calc(100% - 4rem)` (2rem de margem). Cantos retos.
-  - **Scrolled:** `.header.scrolled` fica transparente e `.header-inner` vira **pill** (`border-radius: 999px`, blur, sombra) limitada pelo `.container`.
-- **CTA WhatsApp** (`.nav-cta`): pill suave. Usa `.main-nav .nav-cta` para vencer `.main-nav a`.
-- **Menu mobile** (<900px): drawer, overlay, fecha por X, link, overlay ou Escape.
-- **Itens do menu:** Solução, **Projetos**, Serviços, Resultados, Contato.
+### Header / Menu
+- Header fixo com faixa azul de 3px.
+- Sem rolagem: barra branca full-width, 2rem de margem, cantos retos.
+- Scrolled: `.header-inner` vira pill. Header `z-index: 100`.
+- Menu: Solução, Projetos, Serviços, Resultados, Contato.
+- CTA WhatsApp: `.main-nav .nav-cta` (especificidade maior que `.main-nav a`).
+- Mobile (<900px): drawer + overlay. Overlay `z-index: 80`, drawer `90`.
 
-### Hero
-- Fundo navy (`#0B1F38 → #0A2540 → #0D2B4E`), textos claros, destaque em gradiente no trecho "no Google".
-- No mobile (≤899px): imagem (`.hero-visual`) antes do texto (`.hero-copy`).
-- CTA único: "Quero minha estrutura digital".
+### Hero, logos, portfólio, cases, seções
+- Hero navy, CTA único.
+- Logos em marquee CSS + JS (espaçamento em `margin-right` nos itens).
+- Portfólio `#projetos`: Shekinah, Celus, Loja LM. Sem Trendy Geek.
+- Cases em `projetos/` com a mesma identidade.
+- Problema, solução, serviços, depoimentos, stats.
+- **Oferta `#oferta`:** 4 soluções (não tabela SaaS).
+  1. Landing Page: R$ 400 a R$ 600. Domínio/hospedagem **não** inclusos.
+  2. Site Institucional: R$ 900 a R$ 1.400. Domínio/hospedagem **não** inclusos.
+  3. Estrutura Completa (destaque): R$ 3,90 no 1º mês, depois R$ 89/mês. Anual R$ 890 (de R$ 1.068, economia R$ 178). Domínio/hospedagem **inclusos**.
+  4. Projetos Sob Medida: a combinar.
+- Layout da oferta: 1 coluna no celular, **2×2 no notebook (≥700px)**. Não usar 4 colunas estreitas.
+- CTA final + iframe Zoho.
 
-### Carrossel de logos (`.logos-strip`)
-- Entre o hero e a seção problema.
-- 5 logos: Anadem, Elite Corte, Celus, Seguremed, Odonto Prime.
-- Loop CSS + duplicação do track no JS. Espaçamento em `margin-right` nos `.logo-item` (não `gap`).
-- Sem card/background nas logos; pause no hover.
+### Bio (`bio/index.html`)
+- Link na bio **navy + azul**, alinhada à marca. Sem ciano/verde.
+- Fundo `#0A2540`, accent `#3B82F6`, Sora + Inter.
+- Compacta, pensada para caber na tela do celular, **sem rolagem**.
+- Ações: entrar no site, ver projetos (`#projetos`), soluções (`#servicos`), WhatsApp.
+- Logo sem fundo branco, nome **Identidade** branco + **Web** azul.
+- Linha azul animada sob o subtítulo (sai do centro, depois vai e volta só no miolo da frase, lenta).
+- Rodapé: "Fale conosco" + ícones circulares (WhatsApp, Instagram, e-mail).
+- Número WhatsApp da bio: `5592992534622` (mesmo do site).
 
-### Portfólio (`.portfolio-section`, `id="projetos"`)
-- Entre **Solução/benefícios** e **Serviços**.
-- 3 cards editoriais (não cards pequenos):
-  1. **Sítio Shekinah** — Sistema Web · Gestão → `projetos/shekinah.html`
-  2. **Escola Celus** — Site Institucional · Web Design → `projetos/celus.html`
-  3. **Loja LM** — Catálogo Online · Web Design (bolsas personalizadas) → `projetos/loja-lm.html`
-- Layout desktop: mídia + conteúdo lado a lado; o 2º card usa `.portfolio-card--reverse`.
-- Visual da mídia: chrome de navegador + foto de fundo + overlay navy + título/rótulo no centro (`.portfolio-placeholder--photo`).
-- Sem a imagem, o card permanece navy com o texto. `onerror` esconde o `<img>` quebrado.
-- **Trendy Geek foi removido** e substituído pela Loja LM. Não reintroduzir.
+### Bob (assistente no `index.html`)
+Widget flutuante comercial. Classes só com prefixo `.bob-`. IIFE próprio, separado do JS do site.
 
-### Páginas de case (`projetos/`)
-- Páginas objetivas, mesma identidade do site (navy `#0A2540`, azul `#3B82F6`, Sora + Inter).
-- Conteúdo: breadcrumb, contexto, desafio, solução, características, resultado, tags, CTA WhatsApp, links para os outros cases.
-- Header/footer/WhatsApp flutuante equivalentes ao index; o menu aponta para `../index.html#...`.
-- Copy **sem travessão (—)**.
+**Fluxo atual**
+1. Aparece após **6 segundos**.
+2. "Oi, eu sou o Bob! Qual seu nome?"
+3. Nome (Enter ou Enviar). Vazio: "Me conta seu nome primeiro."
+4. Troca para `bob-beleza.png` (fade).
+5. Pede WhatsApp com máscara `(00) 00000-0000` (11 dígitos).
+6. Incompleto: "Esse número parece incompleto. Confere pra mim?"
+7. Válido: "Perfeito, [NOME]! Obrigado! Já tenho seu contato." e **fecha sozinho**.
+8. **Não abre WhatsApp.** Nome e telefone ficam só na memória da página, para enviar a um sistema no futuro.
+9. X fecha o Bob. Não usa `sessionStorage` (recarregar a página faz ele voltar após 6s).
 
-### Seções do corpo (index)
-- **Problema** (navy): 3 cards.
-- **Solução** + benefícios (4 cards).
-- **Serviços** (cinza): 6 cards.
-- **Depoimentos**: 3 cards (2 Unsplash, 1 `mariana-costa.jpg`).
-- **Stats**: 100+ / 300+ / 95% via IntersectionObserver.
-- **Oferta / soluções** (`#oferta`, `.pricing-grid`): 4 opções, não uma tabela de assinatura.
-  1. **Landing Page:** R$ 400 a R$ 600. Domínio e hospedagem **não** inclusos.
-  2. **Site Institucional:** R$ 900 a R$ 1.400. Domínio e hospedagem **não** inclusos.
-  3. **Estrutura Completa** (destaque `.pricing-card--featured`, selo "Mais completa"): R$ 3,90 no 1º mês, depois R$ 89/mês. Bloco anual R$ 890 (de R$ 1.068, economia R$ 178). Domínio e hospedagem **inclusos**.
-  4. **Projetos Sob Medida:** a combinar (sistemas, lojas, plataformas).
-- CTAs da oferta usam `.wa-link` + `data-wa-message` (mensagem específica por pacote). O JS do WhatsApp lê esse atributo; links sem o atributo seguem a mensagem padrão.
-- **CTA final** + **formulário Zoho** (iframe).
+**Posição**
+- **Mobile:** canto **superior direito**, `top: 5.5rem` (abaixo do menu). `z-index: 90` (header é 100, Bob não cobre o menu). Balão **ao lado esquerdo** do personagem, não embaixo do pé. WhatsApp flutuante continua embaixo à direita (`z-index: 200`).
+- **Desktop (≥900px):** canto inferior direito, à esquerda do `.wa-float` (`right: 6.25rem`, `bottom: 1.5rem`, `z-index: 190`).
 
-### Responsividade
-- `html`/`body`: `overflow-x: hidden` + `overflow-x: clip`.
-- Botões full-width ≤640px.
-- Portfólio em uma coluna no mobile (imagem primeiro).
-- **Oferta:** 1 coluna no celular (layout aprovado). **Notebook (≥700px): grid 2×2** (Landing | Institucional / Completa | Sob Medida). Não voltar para 4 colunas estreitas em tela de notebook. No desktop, a lista duplicada do bloco anual fica oculta (`.pricing-annual .pricing-features { display: none }`).
+**Assets:** `assets/bob/bob-acenando.png` (início), `assets/bob/bob-beleza.png` (depois do nome).
+
+---
+
+## WhatsApp do site
+
+- Número: `5592992534622`
+- URL: `https://wa.me/5592992534622?text=...`
+- Classe: `.wa-link`
+- Mensagem padrão: `Olá, quero criar minha estrutura digital com a Identidade Web`
+- Mensagem por CTA: `data-wa-message`
+- Botão flutuante: `.wa-float` (`bottom: 1.5rem`, `right: 1.5rem`, `z-index: 200`)
 
 ---
 
@@ -110,51 +118,33 @@ identidade web/
 
 | Tema | Decisão |
 |------|---------|
-| **Paleta** | Navy `#0A2540` + accent `#3B82F6` no index e nos cases. Bio ainda usa ciano/verde. |
-| **Tipografia** | Sora (títulos) + Inter (corpo). |
-| **Menu** | Full-width reto no topo; ao rolar, pill. Item **Projetos** no menu. |
-| **Portfólio** | Cards grandes, chrome + overlay + texto. Foto de fundo quando existir. |
-| **Cases** | Páginas curtas e comerciais, não longas. CSS/JS em arquivos à parte só nessa pasta. |
-| **Copy** | Curta, premium, **sem travessão (—)**. |
-| **Logos** | Sem card, sempre coloridas. |
-| **Oferta** | 4 soluções (não SaaS). Completa em destaque. Mobile 1 coluna; notebook 2×2. |
+| Paleta | Navy `#0A2540` + azul `#3B82F6` (index, cases e bio). |
+| Tipografia | Sora (títulos) + Inter (corpo). |
+| Copy | Curta, premium, **sem travessão**. |
+| Oferta | 4 soluções. Completa em destaque. Mobile 1 coluna, notebook 2×2. |
+| Bio | Mini landing de decisão, sem scroll. |
+| Bob | Assistente visual. Não envia dados ainda. Não abre WA. |
 
 ---
 
-## Problemas conhecidos / observações
+## Problemas conhecidos / pendências
 
-1. **`bio/index.html`** ainda destoa (ciano/verde). Não foi alinhado à identidade navy/Sora.
-2. **`assets/loja lm.png`** ainda não está no repo. Card e case da Loja LM usam placeholder até o arquivo existir.
-3. **Código morto / linhas em branco** no `index.html` e bloco comentado no `bio`.
-4. **Depoimentos Unsplash** dependem de CDN externa.
-5. **`prints/`** são screenshots de diagnóstico commitados, não fazem parte do produto.
-6. **Formulário Zoho**: iframe com altura fixa.
-7. **Logo da marca** é referenciada como `assets/logo identidade web.png` no HTML; conferir se o arquivo está presente no deploy.
-
----
-
-## O que ainda falta fazer
-
-- [ ] **Adicionar `assets/loja lm.png`** e conferir o card + a página `projetos/loja-lm.html`.
-- [ ] **Unificar o `bio/index.html`** com Sora, navy/azul e copy premium.
-- [ ] **Revisar código morto** no `index.html` e no `bio`.
-- [ ] **Decidir sobre o formulário Zoho** (iframe vs. link direto).
-- [ ] **Conferir o deploy** no GitHub Pages (caminhos com `%20`).
-- [ ] **Decidir sobre `prints/`** no repo.
-- [ ] Confirmar o **favicon** (`logo identidade web.png`).
+- [ ] Enviar nome/telefone do Bob para o sistema do cliente (ainda não há backend).
+- [ ] Conferir `assets/loja lm.png` / telas da Loja LM no portfólio.
+- [ ] Revisar código morto no `index.html`.
+- [ ] Decidir sobre o iframe Zoho.
+- [ ] Conferir deploy (caminhos com `%20`).
+- [ ] Decidir sobre `prints/` no repo.
+- [ ] Confirmar favicon (`logo identidade web.png`).
 
 ---
 
-## Instruções importantes para continuar o desenvolvimento
+## Instruções para continuar
 
-- **Nada de build/bundlers.** Index: CSS/JS embutidos. Cases: edite `projetos/case.css` e `projetos/case.js` (vale para as 3 páginas).
-- **Não redesenhar o index** ao mexer em cases. No index, altere só o necessário (ex.: um novo card de portfólio + link).
-- **Novo case:** criar `projetos/nome.html` no mesmo molde, incluir no grid de `#projetos` e nos blocos "Mais projetos" das outras páginas.
-- **Especificidade CSS** no index: `.main-nav .nav-cta` vence `.main-nav a`.
-- **Imagens com espaços:** URL-encoding nos `src`. Conferir o nome exato em `assets/`.
-- **Marquee de logos:** `margin-right` nos `.logo-item` + duplicação do track no JS.
-- **Oferta:** não alterar valores. Landing/institucional sem domínio/hospedagem. Completa inclui. WhatsApp por pacote via `data-wa-message`.
-- **Copy:** não usar travessão (—). Preferir vírgula ou dois-pontos.
-- **Verificação mobile:** viewport ~390px e `overflow-x: clip`.
-- **Commit:** o usuário comita manualmente, mensagens curtas em pt-BR. Não force push.
-- **Diagnóstico:** `python -m http.server <porta>` e abrir `index.html` e `projetos/*.html`.
+- **Nada de build.** Index e bio: CSS/JS no HTML. Cases: `projetos/case.css` e `projetos/case.js`.
+- **Bob:** só classes `.bob-`. Não usar `input {}` / `button {}` globais. Não ligar ao `.reveal`. Não cobrir o header no mobile.
+- **Não redesenhar o index** ao mexer em cases ou na bio.
+- **Oferta:** não alterar valores. Completa inclui domínio/hospedagem; as outras não.
+- **Copy:** sem travessão. Vírgula ou dois-pontos.
+- **Commit:** o usuário comita. Mensagens curtas em pt-BR. Não force push.
+- **Diagnóstico:** `python -m http.server <porta>`.
